@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.NeedGatherMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.model.NeedGather" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sale_id" property="saleId" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="owner_usr" property="ownerUsr" jdbcType="INTEGER" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updater" property="updater" jdbcType="VARCHAR" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="c_id" property="cId" jdbcType="INTEGER" />
+    <result column="c_name" property="cName" jdbcType="VARCHAR" />
+    <result column="c_type" property="cType" jdbcType="VARCHAR" />
+    <result column="build_date" property="buildDate" jdbcType="TIMESTAMP" />
+    <result column="sale_code" property="saleCode" jdbcType="VARCHAR" />
+    <result column="total" property="total" jdbcType="DOUBLE" />
+    <result column="payed" property="payed" jdbcType="DOUBLE" />
+    <result column="balance" property="balance" jdbcType="DOUBLE" />
+    <result column="over_flag" property="overFlag" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.crm.model.NeedGather" extends="BaseResultMap" >
+    <result column="shareId" property="shareid" jdbcType="LONGVARCHAR" />
+    <result column="read_shareId" property="readShareid" jdbcType="LONGVARCHAR" />
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, sale_id, pid, owner_usr, creator, createTime, updater, updateTime, c_id, c_name, 
+    c_type, build_date, sale_code, total, payed, balance, over_flag, status
+  </sql>
+  <sql id="Blob_Column_List" >
+    shareId, read_shareId, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from b_need_gather
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_need_gather
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.model.NeedGather" >
+    insert into b_need_gather (id, sale_id, pid, 
+      owner_usr, creator, createTime, 
+      updater, updateTime, c_id, 
+      c_name, c_type, build_date, 
+      sale_code, total, payed, 
+      balance, over_flag, status, 
+      shareId, read_shareId, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{saleId,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, 
+      #{ownerUsr,jdbcType=INTEGER}, #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updater,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{cId,jdbcType=INTEGER}, 
+      #{cName,jdbcType=VARCHAR}, #{cType,jdbcType=VARCHAR}, #{buildDate,jdbcType=TIMESTAMP}, 
+      #{saleCode,jdbcType=VARCHAR}, #{total,jdbcType=DOUBLE}, #{payed,jdbcType=DOUBLE}, 
+      #{balance,jdbcType=DOUBLE}, #{overFlag,jdbcType=CHAR}, #{status,jdbcType=VARCHAR}, 
+      #{shareid,jdbcType=LONGVARCHAR}, #{readShareid,jdbcType=LONGVARCHAR}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.model.NeedGather" >
+    insert into b_need_gather
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="saleId != null" >
+        sale_id,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="ownerUsr != null" >
+        owner_usr,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cName != null" >
+        c_name,
+      </if>
+      <if test="cType != null" >
+        c_type,
+      </if>
+      <if test="buildDate != null" >
+        build_date,
+      </if>
+      <if test="saleCode != null" >
+        sale_code,
+      </if>
+      <if test="total != null" >
+        total,
+      </if>
+      <if test="payed != null" >
+        payed,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="overFlag != null" >
+        over_flag,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="shareid != null" >
+        shareId,
+      </if>
+      <if test="readShareid != null" >
+        read_shareId,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="saleId != null" >
+        #{saleId,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="ownerUsr != null" >
+        #{ownerUsr,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cId != null" >
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="cName != null" >
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cType != null" >
+        #{cType,jdbcType=VARCHAR},
+      </if>
+      <if test="buildDate != null" >
+        #{buildDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saleCode != null" >
+        #{saleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=DOUBLE},
+      </if>
+      <if test="payed != null" >
+        #{payed,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="overFlag != null" >
+        #{overFlag,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="shareid != null" >
+        #{shareid,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="readShareid != null" >
+        #{readShareid,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.model.NeedGather" >
+    update b_need_gather
+    <set >
+      <if test="saleId != null" >
+        sale_id = #{saleId,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="ownerUsr != null" >
+        owner_usr = #{ownerUsr,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cId != null" >
+        c_id = #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="cName != null" >
+        c_name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cType != null" >
+        c_type = #{cType,jdbcType=VARCHAR},
+      </if>
+      <if test="buildDate != null" >
+        build_date = #{buildDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saleCode != null" >
+        sale_code = #{saleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        total = #{total,jdbcType=DOUBLE},
+      </if>
+      <if test="payed != null" >
+        payed = #{payed,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="overFlag != null" >
+        over_flag = #{overFlag,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="shareid != null" >
+        shareId = #{shareid,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="readShareid != null" >
+        read_shareId = #{readShareid,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.crm.model.NeedGather" >
+    update b_need_gather
+    set sale_id = #{saleId,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      owner_usr = #{ownerUsr,jdbcType=INTEGER},
+      creator = #{creator,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      c_id = #{cId,jdbcType=INTEGER},
+      c_name = #{cName,jdbcType=VARCHAR},
+      c_type = #{cType,jdbcType=VARCHAR},
+      build_date = #{buildDate,jdbcType=TIMESTAMP},
+      sale_code = #{saleCode,jdbcType=VARCHAR},
+      total = #{total,jdbcType=DOUBLE},
+      payed = #{payed,jdbcType=DOUBLE},
+      balance = #{balance,jdbcType=DOUBLE},
+      over_flag = #{overFlag,jdbcType=CHAR},
+      status = #{status,jdbcType=VARCHAR},
+      shareId = #{shareid,jdbcType=LONGVARCHAR},
+      read_shareId = #{readShareid,jdbcType=LONGVARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.model.NeedGather" >
+    update b_need_gather
+    set sale_id = #{saleId,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      owner_usr = #{ownerUsr,jdbcType=INTEGER},
+      creator = #{creator,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      c_id = #{cId,jdbcType=INTEGER},
+      c_name = #{cName,jdbcType=VARCHAR},
+      c_type = #{cType,jdbcType=VARCHAR},
+      build_date = #{buildDate,jdbcType=TIMESTAMP},
+      sale_code = #{saleCode,jdbcType=VARCHAR},
+      total = #{total,jdbcType=DOUBLE},
+      payed = #{payed,jdbcType=DOUBLE},
+      balance = #{balance,jdbcType=DOUBLE},
+      over_flag = #{overFlag,jdbcType=CHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <!--=======================================================================================================================-->
+
+
+  <sql id="SQL">
+    WHERE 1=1
+    <if test="n.saleCode != null and n.saleCode != ''">
+      AND sale_code LIKE concat('%',#{n.saleCode},'%')
+    </if>
+    <if test="n.cName != null and n.cName != ''">
+      AND c_name LIKE concat('%',#{n.cName},'%')
+    </if>
+    <if test="n.createTime != null and n.createTime != ''">
+      AND createTime LIKE concat('%',#{n.createTime},'%')
+    </if>
+    <if test="n.ownerUsr != null and n.ownerUsr != ''">
+      AND owner_usr LIKE concat('%',#{n.ownerUsr},'%')
+    </if>
+    <!--<if test="n.saleCode != null and n.saleCode != ''">-->
+      <!--AND sale_code LIKE concat('%',#{n.saleCode},'%')-->
+    <!--</if>-->
+    <!--<if test="n.saleCode != null and n.saleCode != ''">-->
+      <!--AND sale_code LIKE concat('%',#{n.saleCode},'%')-->
+    <!--</if>-->
+    <!--<if test="n.saleCode != null and n.saleCode != ''">-->
+      <!--AND sale_code LIKE concat('%',#{n.saleCode},'%')-->
+    <!--</if>-->
+    <!--<if test="n.saleCode != null and n.saleCode != ''">-->
+      <!--AND sale_code LIKE concat('%',#{n.saleCode},'%')-->
+    <!--</if>-->
+    <!--<if test="n.saleCode != null and n.saleCode != ''">-->
+      <!--AND sale_code LIKE concat('%',#{n.saleCode},'%')-->
+    <!--</if>-->
+  </sql>
+
+
+  <select id="getNeedGatherList" resultType="com.crm.model.NeedGather">
+    SELECT id,sale_code saleCode,c_name cName,build_date buildDate,
+    payed,total,balance,over_flag overFlag,owner_usr ownerUsr,status
+    FROM b_need_gather
+    <!--<include refid="SQL"></include>-->
+    limit #{from},#{pageSize}
+  </select>
+
+
+  <select id="countNeedGather" resultType="int">
+    SELECT count(id)
+    FROM b_need_gather
+    <!--<include refid="SQL"></include>-->
+  </select>
+
+  <select id="findAllOrder" resultType="com.crm.model.NeedGather">
+    SELECT id,sale_code saleCode FROM b_need_gather
+  </select>
+
+  <select id="findOrderByIds" resultType="com.crm.model.NeedGather">
+    SELECT id,sale_code saleCode FROM b_order
+    WHERE id IN
+    <foreach collection="ids" open="(" separator="," close=")" item="ids">#{ids}</foreach>
+  </select>
+
+
+</mapper>

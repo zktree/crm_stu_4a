@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.crm.dao.ProductDao">
+
+	<sql id="SQL1">
+		WHERE 1=1
+		<if test="product.lowerPrice != null and product.lowerPrice != '' and product.upperPrice != null and product.upperPrice != ''">
+			AND p.price	BETWEEN #{product.lowerPrice} AND #{product.upperPrice}
+		</if>
+		<if test="product.name != null and product.name != ''">
+			AND p.name LIKE concat('%',#{product.name},'%')
+		</if>
+		<if test="product.code != null and product.code != ''">
+			AND p.code LIKE concat('%',#{product.code},'%')
+		</if>
+		<if test="product.pycode != null and product.pycode != ''">
+			AND p.pycode LIKE concat('%',#{product.pycode},'%')
+		</if>
+		<if test="product.productTypeName != null and product.productTypeName != ''">
+			AND t.name LIKE concat('%',#{product.productTypeName},'%')
+		</if>
+		<if test="product.provider != null and product.provider != ''">
+			AND p.provider LIKE concat('%',#{product.provider},'%')
+		</if>
+
+
+	</sql>
+
+	<select id="getProductList" resultType="com.crm.model.Product">
+		SELECT p.id,t.`name` productTypeName,p.`name` ,p.code,p.model,p.spec,p.product_size productSize,p.stock,p.price
+   		FROM b_product p JOIN b_product_type t
+   		ON p.ptype_id = t.id
+   		limit #{from},#{pageSize}
+	</select>
+
+	<select id="countProduct" resultType="int">
+		SELECT COUNT(id)
+		FROM b_product
+	</select>
+
+	<select id="countProduct1" resultType="int">
+		SELECT COUNT(p.id)
+		FROM b_product p JOIN b_product_type t
+		ON p.ptype_id = t.id
+		<include refid="SQL1"></include>
+	</select>
+
+	<select id="getProductList2" resultType="com.crm.model.Product">
+		SELECT p.id,t.`name` productTypeName,p.`name` ,p.code,p.model,p.spec,p.product_size productSize,p.stock,p.price
+   		FROM b_product p JOIN b_product_type t
+   		ON p.ptype_id = t.id
+   		<include refid="SQL1"></include>
+   		limit #{from},#{pageSize}
+	</select>
+
+	<delete id="delProductListByIds">
+		DELETE FROM b_product WHERE id=#{id}
+	</delete>
+	<insert id="addProduct">
+		INSERT INTO b_product  (ptype_id,sort,creater,createTime,updater,updateTime,
+		remark,status,code,name,model,spec,unit,color,product_size,bar_code,provider,
+		stock,price,buy_price,picture,pycode)
+		VALUES(#{p.ptypeId},#{p.sort},#{p.creater},#{p.createTime},#{p.updater},#{p.updateTime},
+		#{p.remark},#{p.status},#{p.code},#{p.name},#{p.model},#{p.spec},#{p.unit},
+		#{p.color},#{p.productSize},#{p.barCode},#{p.provider},#{p.stock},
+		#{p.price},#{p.buyPrice},#{p.picture},#{p.pycode})
+	</insert>
+	<select id="findProductById" resultType="com.crm.model.Product">
+		SELECT id,ptype_id ptypeId,sort,creater,createTime,updater,updateTime,
+		remark,status,code,name,model,spec,unit,color,product_size productSize,bar_code barCode,provider,
+		stock,price,buy_price buyPrice,picture,pycode FROM b_product WHERE id=#{productId}
+	</select>
+	<update id="updateProduct">
+		UPDATE b_product
+		SET ptype_id = #{p.ptypeId},sort = #{p.sort},creater = #{p.creater},createTime = #{p.createTime},
+		updater = #{p.updater},updateTime = #{p.updateTime},
+		remark = #{p.remark},status = #{p.status},code = #{p.code},name = #{p.name},model = #{p.model},spec = #{p.spec},
+		unit = #{p.spec},color = #{p.color},product_size = #{p.productSize},bar_code = #{p.barCode},provider = #{p.provider},
+		stock = #{p.stock},price = #{p.price},buy_price = #{p.buyPrice},picture = #{p.picture},pycode = #{p.pycode}
+		where id=#{p.id}
+	</update>
+	<select id="findAllProduct" resultType="com.crm.model.Product">
+		SELECT id,name FROM b_product
+	</select>
+	<select id="findProductByIds" resultType="com.crm.model.Product">
+		SELECT id,name FROM b_product
+		WHERE id IN
+		<foreach collection="ids" open="(" separator="," close=")" item="ids">#{ids}</foreach>
+	</select>
+
+
+
+</mapper>
+	

@@ -1,0 +1,934 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.CompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.model.Company" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="pycode" property="pycode" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="grade" property="grade" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="c_type" property="cType" jdbcType="VARCHAR" />
+    <result column="m_type" property="mType" jdbcType="VARCHAR" />
+    <result column="region_id" property="regionId" jdbcType="INTEGER" />
+    <result column="region_name" property="regionName" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="fax" property="fax" jdbcType="VARCHAR" />
+    <result column="postcode" property="postcode" jdbcType="VARCHAR" />
+    <result column="tel1" property="tel1" jdbcType="VARCHAR" />
+    <result column="tel2" property="tel2" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="web" property="web" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="dealing" property="dealing" jdbcType="VARCHAR" />
+    <result column="scale" property="scale" jdbcType="VARCHAR" />
+    <result column="register_money" property="registerMoney" jdbcType="VARCHAR" />
+    <result column="kind" property="kind" jdbcType="VARCHAR" />
+    <result column="trade" property="trade" jdbcType="VARCHAR" />
+    <result column="legal_person" property="legalPerson" jdbcType="VARCHAR" />
+    <result column="bank" property="bank" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="tax_code" property="taxCode" jdbcType="VARCHAR" />
+    <result column="buy_flag" property="buyFlag" jdbcType="CHAR" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater" property="updater" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="next_touch_date" property="nextTouchDate" jdbcType="TIMESTAMP" />
+    <result column="next_service_date" property="nextServiceDate" jdbcType="TIMESTAMP" />
+    <result column="first_touch_date" property="firstTouchDate" jdbcType="TIMESTAMP" />
+    <result column="last_touch_date" property="lastTouchDate" jdbcType="TIMESTAMP" />
+    <result column="dispense_person" property="dispensePerson" jdbcType="VARCHAR" />
+    <result column="dispense_date" property="dispenseDate" jdbcType="TIMESTAMP" />
+    <result column="apply_user_id" property="applyUserId" jdbcType="INTEGER" />
+    <result column="s_person" property="sPerson" jdbcType="VARCHAR" />
+    <result column="s_date" property="sDate" jdbcType="TIMESTAMP" />
+    <result column="plan_callback_date" property="planCallbackDate" jdbcType="TIMESTAMP" />
+    <result column="cur_link_flag" property="curLinkFlag" jdbcType="CHAR" />
+    <result column="cur_buy_flag" property="curBuyFlag" jdbcType="CHAR" />
+    <result column="freeze_leave_day" property="freezeLeaveDay" jdbcType="INTEGER" />
+    <result column="custom1" property="custom1" jdbcType="VARCHAR" />
+    <result column="custom2" property="custom2" jdbcType="VARCHAR" />
+    <result column="custom3" property="custom3" jdbcType="VARCHAR" />
+    <result column="custom4" property="custom4" jdbcType="VARCHAR" />
+    <result column="choice1" property="choice1" jdbcType="VARCHAR" />
+    <result column="choice2" property="choice2" jdbcType="VARCHAR" />
+    <result column="choice3" property="choice3" jdbcType="VARCHAR" />
+    <result column="choice4" property="choice4" jdbcType="VARCHAR" />
+    <result column="time1" property="time1" jdbcType="TIMESTAMP" />
+    <result column="time2" property="time2" jdbcType="TIMESTAMP" />
+    <result column="share_flag" property="shareFlag" jdbcType="CHAR" />
+    <result column="quality" property="quality" jdbcType="VARCHAR" />
+    <result column="owner_usr" property="ownerUsr" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.crm.model.Company" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+    <result column="next_touch_aim" property="nextTouchAim" jdbcType="LONGVARCHAR" />
+    <result column="s_reason" property="sReason" jdbcType="LONGVARCHAR" />
+    <result column="plan_callback_reason" property="planCallbackReason" jdbcType="LONGVARCHAR" />
+    <result column="share_ids" property="shareIds" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, pycode, code, grade, source, c_type, m_type, region_id, region_name, province, 
+    city, fax, postcode, tel1, tel2, mobile, email, web, address, dealing, scale, register_money, 
+    kind, trade, legal_person, bank, account, tax_code, buy_flag, creater, create_time, 
+    updater, update_time, status, next_touch_date, next_service_date, first_touch_date, 
+    last_touch_date, dispense_person, dispense_date, apply_user_id, s_person, s_date, 
+    plan_callback_date, cur_link_flag, cur_buy_flag, freeze_leave_day, custom1, custom2, 
+    custom3, custom4, choice1, choice2, choice3, choice4, time1, time2, share_flag, quality, 
+    owner_usr
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark, next_touch_aim, s_reason, plan_callback_reason, share_ids
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from c_company
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from c_company
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.model.Company" >
+    insert into c_company (id, name, pycode, 
+      code, grade, source, 
+      c_type, m_type, region_id, 
+      region_name, province, city, 
+      fax, postcode, tel1, 
+      tel2, mobile, email, 
+      web, address, dealing, 
+      scale, register_money, kind, 
+      trade, legal_person, bank, 
+      account, tax_code, buy_flag, 
+      creater, create_time, updater, 
+      update_time, status, next_touch_date, 
+      next_service_date, first_touch_date, last_touch_date, 
+      dispense_person, dispense_date, apply_user_id, 
+      s_person, s_date, plan_callback_date, 
+      cur_link_flag, cur_buy_flag, freeze_leave_day, 
+      custom1, custom2, custom3, 
+      custom4, choice1, choice2, 
+      choice3, choice4, time1, 
+      time2, share_flag, quality, 
+      owner_usr, remark, next_touch_aim, 
+      s_reason, plan_callback_reason, share_ids
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{pycode,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
+      #{cType,jdbcType=VARCHAR}, #{mType,jdbcType=VARCHAR}, #{regionId,jdbcType=INTEGER}, 
+      #{regionName,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{fax,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, #{tel1,jdbcType=VARCHAR}, 
+      #{tel2,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{web,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{dealing,jdbcType=VARCHAR}, 
+      #{scale,jdbcType=VARCHAR}, #{registerMoney,jdbcType=VARCHAR}, #{kind,jdbcType=VARCHAR}, 
+      #{trade,jdbcType=VARCHAR}, #{legalPerson,jdbcType=VARCHAR}, #{bank,jdbcType=VARCHAR}, 
+      #{account,jdbcType=VARCHAR}, #{taxCode,jdbcType=VARCHAR}, #{buyFlag,jdbcType=CHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{nextTouchDate,jdbcType=TIMESTAMP}, 
+      #{nextServiceDate,jdbcType=TIMESTAMP}, #{firstTouchDate,jdbcType=TIMESTAMP}, #{lastTouchDate,jdbcType=TIMESTAMP}, 
+      #{dispensePerson,jdbcType=VARCHAR}, #{dispenseDate,jdbcType=TIMESTAMP}, #{applyUserId,jdbcType=INTEGER}, 
+      #{sPerson,jdbcType=VARCHAR}, #{sDate,jdbcType=TIMESTAMP}, #{planCallbackDate,jdbcType=TIMESTAMP}, 
+      #{curLinkFlag,jdbcType=CHAR}, #{curBuyFlag,jdbcType=CHAR}, #{freezeLeaveDay,jdbcType=INTEGER}, 
+      #{custom1,jdbcType=VARCHAR}, #{custom2,jdbcType=VARCHAR}, #{custom3,jdbcType=VARCHAR}, 
+      #{custom4,jdbcType=VARCHAR}, #{choice1,jdbcType=VARCHAR}, #{choice2,jdbcType=VARCHAR}, 
+      #{choice3,jdbcType=VARCHAR}, #{choice4,jdbcType=VARCHAR}, #{time1,jdbcType=TIMESTAMP}, 
+      #{time2,jdbcType=TIMESTAMP}, #{shareFlag,jdbcType=CHAR}, #{quality,jdbcType=VARCHAR}, 
+      #{ownerUsr,jdbcType=INTEGER}, #{remark,jdbcType=LONGVARCHAR}, #{nextTouchAim,jdbcType=LONGVARCHAR}, 
+      #{sReason,jdbcType=LONGVARCHAR}, #{planCallbackReason,jdbcType=LONGVARCHAR}, #{shareIds,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.model.Company" >
+    insert into c_company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="pycode != null" >
+        pycode,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="cType != null" >
+        c_type,
+      </if>
+      <if test="mType != null" >
+        m_type,
+      </if>
+      <if test="regionId != null" >
+        region_id,
+      </if>
+      <if test="regionName != null" >
+        region_name,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="fax != null" >
+        fax,
+      </if>
+      <if test="postcode != null" >
+        postcode,
+      </if>
+      <if test="tel1 != null" >
+        tel1,
+      </if>
+      <if test="tel2 != null" >
+        tel2,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="web != null" >
+        web,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="dealing != null" >
+        dealing,
+      </if>
+      <if test="scale != null" >
+        scale,
+      </if>
+      <if test="registerMoney != null" >
+        register_money,
+      </if>
+      <if test="kind != null" >
+        kind,
+      </if>
+      <if test="trade != null" >
+        trade,
+      </if>
+      <if test="legalPerson != null" >
+        legal_person,
+      </if>
+      <if test="bank != null" >
+        bank,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="taxCode != null" >
+        tax_code,
+      </if>
+      <if test="buyFlag != null" >
+        buy_flag,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="nextTouchDate != null" >
+        next_touch_date,
+      </if>
+      <if test="nextServiceDate != null" >
+        next_service_date,
+      </if>
+      <if test="firstTouchDate != null" >
+        first_touch_date,
+      </if>
+      <if test="lastTouchDate != null" >
+        last_touch_date,
+      </if>
+      <if test="dispensePerson != null" >
+        dispense_person,
+      </if>
+      <if test="dispenseDate != null" >
+        dispense_date,
+      </if>
+      <if test="applyUserId != null" >
+        apply_user_id,
+      </if>
+      <if test="sPerson != null" >
+        s_person,
+      </if>
+      <if test="sDate != null" >
+        s_date,
+      </if>
+      <if test="planCallbackDate != null" >
+        plan_callback_date,
+      </if>
+      <if test="curLinkFlag != null" >
+        cur_link_flag,
+      </if>
+      <if test="curBuyFlag != null" >
+        cur_buy_flag,
+      </if>
+      <if test="freezeLeaveDay != null" >
+        freeze_leave_day,
+      </if>
+      <if test="custom1 != null" >
+        custom1,
+      </if>
+      <if test="custom2 != null" >
+        custom2,
+      </if>
+      <if test="custom3 != null" >
+        custom3,
+      </if>
+      <if test="custom4 != null" >
+        custom4,
+      </if>
+      <if test="choice1 != null" >
+        choice1,
+      </if>
+      <if test="choice2 != null" >
+        choice2,
+      </if>
+      <if test="choice3 != null" >
+        choice3,
+      </if>
+      <if test="choice4 != null" >
+        choice4,
+      </if>
+      <if test="time1 != null" >
+        time1,
+      </if>
+      <if test="time2 != null" >
+        time2,
+      </if>
+      <if test="shareFlag != null" >
+        share_flag,
+      </if>
+      <if test="quality != null" >
+        quality,
+      </if>
+      <if test="ownerUsr != null" >
+        owner_usr,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="nextTouchAim != null" >
+        next_touch_aim,
+      </if>
+      <if test="sReason != null" >
+        s_reason,
+      </if>
+      <if test="planCallbackReason != null" >
+        plan_callback_reason,
+      </if>
+      <if test="shareIds != null" >
+        share_ids,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pycode != null" >
+        #{pycode,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="cType != null" >
+        #{cType,jdbcType=VARCHAR},
+      </if>
+      <if test="mType != null" >
+        #{mType,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        #{regionId,jdbcType=INTEGER},
+      </if>
+      <if test="regionName != null" >
+        #{regionName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tel1 != null" >
+        #{tel1,jdbcType=VARCHAR},
+      </if>
+      <if test="tel2 != null" >
+        #{tel2,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="web != null" >
+        #{web,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="dealing != null" >
+        #{dealing,jdbcType=VARCHAR},
+      </if>
+      <if test="scale != null" >
+        #{scale,jdbcType=VARCHAR},
+      </if>
+      <if test="registerMoney != null" >
+        #{registerMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="trade != null" >
+        #{trade,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null" >
+        #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="taxCode != null" >
+        #{taxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buyFlag != null" >
+        #{buyFlag,jdbcType=CHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="nextTouchDate != null" >
+        #{nextTouchDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextServiceDate != null" >
+        #{nextServiceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstTouchDate != null" >
+        #{firstTouchDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTouchDate != null" >
+        #{lastTouchDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dispensePerson != null" >
+        #{dispensePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="dispenseDate != null" >
+        #{dispenseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyUserId != null" >
+        #{applyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="sPerson != null" >
+        #{sPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="sDate != null" >
+        #{sDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planCallbackDate != null" >
+        #{planCallbackDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="curLinkFlag != null" >
+        #{curLinkFlag,jdbcType=CHAR},
+      </if>
+      <if test="curBuyFlag != null" >
+        #{curBuyFlag,jdbcType=CHAR},
+      </if>
+      <if test="freezeLeaveDay != null" >
+        #{freezeLeaveDay,jdbcType=INTEGER},
+      </if>
+      <if test="custom1 != null" >
+        #{custom1,jdbcType=VARCHAR},
+      </if>
+      <if test="custom2 != null" >
+        #{custom2,jdbcType=VARCHAR},
+      </if>
+      <if test="custom3 != null" >
+        #{custom3,jdbcType=VARCHAR},
+      </if>
+      <if test="custom4 != null" >
+        #{custom4,jdbcType=VARCHAR},
+      </if>
+      <if test="choice1 != null" >
+        #{choice1,jdbcType=VARCHAR},
+      </if>
+      <if test="choice2 != null" >
+        #{choice2,jdbcType=VARCHAR},
+      </if>
+      <if test="choice3 != null" >
+        #{choice3,jdbcType=VARCHAR},
+      </if>
+      <if test="choice4 != null" >
+        #{choice4,jdbcType=VARCHAR},
+      </if>
+      <if test="time1 != null" >
+        #{time1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time2 != null" >
+        #{time2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shareFlag != null" >
+        #{shareFlag,jdbcType=CHAR},
+      </if>
+      <if test="quality != null" >
+        #{quality,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerUsr != null" >
+        #{ownerUsr,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="nextTouchAim != null" >
+        #{nextTouchAim,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sReason != null" >
+        #{sReason,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="planCallbackReason != null" >
+        #{planCallbackReason,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="shareIds != null" >
+        #{shareIds,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.model.Company" >
+    update c_company
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pycode != null" >
+        pycode = #{pycode,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="cType != null" >
+        c_type = #{cType,jdbcType=VARCHAR},
+      </if>
+      <if test="mType != null" >
+        m_type = #{mType,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        region_id = #{regionId,jdbcType=INTEGER},
+      </if>
+      <if test="regionName != null" >
+        region_name = #{regionName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tel1 != null" >
+        tel1 = #{tel1,jdbcType=VARCHAR},
+      </if>
+      <if test="tel2 != null" >
+        tel2 = #{tel2,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="web != null" >
+        web = #{web,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="dealing != null" >
+        dealing = #{dealing,jdbcType=VARCHAR},
+      </if>
+      <if test="scale != null" >
+        scale = #{scale,jdbcType=VARCHAR},
+      </if>
+      <if test="registerMoney != null" >
+        register_money = #{registerMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        kind = #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="trade != null" >
+        trade = #{trade,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null" >
+        legal_person = #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        bank = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="taxCode != null" >
+        tax_code = #{taxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buyFlag != null" >
+        buy_flag = #{buyFlag,jdbcType=CHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="nextTouchDate != null" >
+        next_touch_date = #{nextTouchDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextServiceDate != null" >
+        next_service_date = #{nextServiceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstTouchDate != null" >
+        first_touch_date = #{firstTouchDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTouchDate != null" >
+        last_touch_date = #{lastTouchDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dispensePerson != null" >
+        dispense_person = #{dispensePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="dispenseDate != null" >
+        dispense_date = #{dispenseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyUserId != null" >
+        apply_user_id = #{applyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="sPerson != null" >
+        s_person = #{sPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="sDate != null" >
+        s_date = #{sDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planCallbackDate != null" >
+        plan_callback_date = #{planCallbackDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="curLinkFlag != null" >
+        cur_link_flag = #{curLinkFlag,jdbcType=CHAR},
+      </if>
+      <if test="curBuyFlag != null" >
+        cur_buy_flag = #{curBuyFlag,jdbcType=CHAR},
+      </if>
+      <if test="freezeLeaveDay != null" >
+        freeze_leave_day = #{freezeLeaveDay,jdbcType=INTEGER},
+      </if>
+      <if test="custom1 != null" >
+        custom1 = #{custom1,jdbcType=VARCHAR},
+      </if>
+      <if test="custom2 != null" >
+        custom2 = #{custom2,jdbcType=VARCHAR},
+      </if>
+      <if test="custom3 != null" >
+        custom3 = #{custom3,jdbcType=VARCHAR},
+      </if>
+      <if test="custom4 != null" >
+        custom4 = #{custom4,jdbcType=VARCHAR},
+      </if>
+      <if test="choice1 != null" >
+        choice1 = #{choice1,jdbcType=VARCHAR},
+      </if>
+      <if test="choice2 != null" >
+        choice2 = #{choice2,jdbcType=VARCHAR},
+      </if>
+      <if test="choice3 != null" >
+        choice3 = #{choice3,jdbcType=VARCHAR},
+      </if>
+      <if test="choice4 != null" >
+        choice4 = #{choice4,jdbcType=VARCHAR},
+      </if>
+      <if test="time1 != null" >
+        time1 = #{time1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time2 != null" >
+        time2 = #{time2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shareFlag != null" >
+        share_flag = #{shareFlag,jdbcType=CHAR},
+      </if>
+      <if test="quality != null" >
+        quality = #{quality,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerUsr != null" >
+        owner_usr = #{ownerUsr,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="nextTouchAim != null" >
+        next_touch_aim = #{nextTouchAim,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sReason != null" >
+        s_reason = #{sReason,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="planCallbackReason != null" >
+        plan_callback_reason = #{planCallbackReason,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="shareIds != null" >
+        share_ids = #{shareIds,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.crm.model.Company" >
+    update c_company
+    set name = #{name,jdbcType=VARCHAR},
+      pycode = #{pycode,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      c_type = #{cType,jdbcType=VARCHAR},
+      m_type = #{mType,jdbcType=VARCHAR},
+      region_id = #{regionId,jdbcType=INTEGER},
+      region_name = #{regionName,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      tel1 = #{tel1,jdbcType=VARCHAR},
+      tel2 = #{tel2,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      web = #{web,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      dealing = #{dealing,jdbcType=VARCHAR},
+      scale = #{scale,jdbcType=VARCHAR},
+      register_money = #{registerMoney,jdbcType=VARCHAR},
+      kind = #{kind,jdbcType=VARCHAR},
+      trade = #{trade,jdbcType=VARCHAR},
+      legal_person = #{legalPerson,jdbcType=VARCHAR},
+      bank = #{bank,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      tax_code = #{taxCode,jdbcType=VARCHAR},
+      buy_flag = #{buyFlag,jdbcType=CHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      next_touch_date = #{nextTouchDate,jdbcType=TIMESTAMP},
+      next_service_date = #{nextServiceDate,jdbcType=TIMESTAMP},
+      first_touch_date = #{firstTouchDate,jdbcType=TIMESTAMP},
+      last_touch_date = #{lastTouchDate,jdbcType=TIMESTAMP},
+      dispense_person = #{dispensePerson,jdbcType=VARCHAR},
+      dispense_date = #{dispenseDate,jdbcType=TIMESTAMP},
+      apply_user_id = #{applyUserId,jdbcType=INTEGER},
+      s_person = #{sPerson,jdbcType=VARCHAR},
+      s_date = #{sDate,jdbcType=TIMESTAMP},
+      plan_callback_date = #{planCallbackDate,jdbcType=TIMESTAMP},
+      cur_link_flag = #{curLinkFlag,jdbcType=CHAR},
+      cur_buy_flag = #{curBuyFlag,jdbcType=CHAR},
+      freeze_leave_day = #{freezeLeaveDay,jdbcType=INTEGER},
+      custom1 = #{custom1,jdbcType=VARCHAR},
+      custom2 = #{custom2,jdbcType=VARCHAR},
+      custom3 = #{custom3,jdbcType=VARCHAR},
+      custom4 = #{custom4,jdbcType=VARCHAR},
+      choice1 = #{choice1,jdbcType=VARCHAR},
+      choice2 = #{choice2,jdbcType=VARCHAR},
+      choice3 = #{choice3,jdbcType=VARCHAR},
+      choice4 = #{choice4,jdbcType=VARCHAR},
+      time1 = #{time1,jdbcType=TIMESTAMP},
+      time2 = #{time2,jdbcType=TIMESTAMP},
+      share_flag = #{shareFlag,jdbcType=CHAR},
+      quality = #{quality,jdbcType=VARCHAR},
+      owner_usr = #{ownerUsr,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=LONGVARCHAR},
+      next_touch_aim = #{nextTouchAim,jdbcType=LONGVARCHAR},
+      s_reason = #{sReason,jdbcType=LONGVARCHAR},
+      plan_callback_reason = #{planCallbackReason,jdbcType=LONGVARCHAR},
+      share_ids = #{shareIds,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.model.Company" >
+    update c_company
+    set name = #{name,jdbcType=VARCHAR},
+      pycode = #{pycode,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      c_type = #{cType,jdbcType=VARCHAR},
+      m_type = #{mType,jdbcType=VARCHAR},
+      region_id = #{regionId,jdbcType=INTEGER},
+      region_name = #{regionName,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      tel1 = #{tel1,jdbcType=VARCHAR},
+      tel2 = #{tel2,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      web = #{web,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      dealing = #{dealing,jdbcType=VARCHAR},
+      scale = #{scale,jdbcType=VARCHAR},
+      register_money = #{registerMoney,jdbcType=VARCHAR},
+      kind = #{kind,jdbcType=VARCHAR},
+      trade = #{trade,jdbcType=VARCHAR},
+      legal_person = #{legalPerson,jdbcType=VARCHAR},
+      bank = #{bank,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      tax_code = #{taxCode,jdbcType=VARCHAR},
+      buy_flag = #{buyFlag,jdbcType=CHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      next_touch_date = #{nextTouchDate,jdbcType=TIMESTAMP},
+      next_service_date = #{nextServiceDate,jdbcType=TIMESTAMP},
+      first_touch_date = #{firstTouchDate,jdbcType=TIMESTAMP},
+      last_touch_date = #{lastTouchDate,jdbcType=TIMESTAMP},
+      dispense_person = #{dispensePerson,jdbcType=VARCHAR},
+      dispense_date = #{dispenseDate,jdbcType=TIMESTAMP},
+      apply_user_id = #{applyUserId,jdbcType=INTEGER},
+      s_person = #{sPerson,jdbcType=VARCHAR},
+      s_date = #{sDate,jdbcType=TIMESTAMP},
+      plan_callback_date = #{planCallbackDate,jdbcType=TIMESTAMP},
+      cur_link_flag = #{curLinkFlag,jdbcType=CHAR},
+      cur_buy_flag = #{curBuyFlag,jdbcType=CHAR},
+      freeze_leave_day = #{freezeLeaveDay,jdbcType=INTEGER},
+      custom1 = #{custom1,jdbcType=VARCHAR},
+      custom2 = #{custom2,jdbcType=VARCHAR},
+      custom3 = #{custom3,jdbcType=VARCHAR},
+      custom4 = #{custom4,jdbcType=VARCHAR},
+      choice1 = #{choice1,jdbcType=VARCHAR},
+      choice2 = #{choice2,jdbcType=VARCHAR},
+      choice3 = #{choice3,jdbcType=VARCHAR},
+      choice4 = #{choice4,jdbcType=VARCHAR},
+      time1 = #{time1,jdbcType=TIMESTAMP},
+      time2 = #{time2,jdbcType=TIMESTAMP},
+      share_flag = #{shareFlag,jdbcType=CHAR},
+      quality = #{quality,jdbcType=VARCHAR},
+      owner_usr = #{ownerUsr,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <sql id="SQL">
+    WHERE 1=1
+    <if test="c.quality != null and c.quality != ''">
+      AND quality LIKE concat('%',#{c.quality},'%')
+    </if>
+    <if test="c.name != null and c.name != ''">
+      AND name LIKE concat('%',#{c.name},'%')
+    </if>
+    <if test="c.ownerUsr != null and c.ownerUsr != ''">
+      AND owner_usr LIKE concat('%',#{c.ownerUsr},'%')
+    </if>
+    <if test="c.tel1 != null and c.tel1 != ''">
+      AND tel1 LIKE concat('%',#{c.tel1},'%')
+    </if>
+    <if test="c.pycode != null and c.pycode != ''">
+      AND pycode LIKE concat('%',#{c.pycode},'%')
+    </if>
+    <if test="c.fax != null and c.fax != ''">
+      AND fax LIKE concat('%',#{c.fax},'%')
+    </if>
+
+  </sql>
+
+
+
+  <select id="getCompanyList" resultType="com.crm.model.Company">
+    SELECT c.id,c.code,c.name,c.quality,c.grade,c.tel1,c.postcode,c.email
+    FROM c_company c
+    <include refid="SQL"></include>
+    limit #{from},#{pageSize}
+
+  </select>
+
+  <select id="countCompany" resultType="int">
+    SELECT count(c.id)
+    FROM c_company c
+    <include refid="SQL"></include>
+  </select>
+
+  <select id="findAllCompany" resultType="com.crm.model.Company">
+    SELECT id,name FROM c_company
+  </select>
+
+  <select id="getUsers" resultType="com.crm.model.Suser">
+    SELECT id,name FROM s_user
+  </select>
+
+
+
+
+</mapper>

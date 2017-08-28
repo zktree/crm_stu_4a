@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.ProductTypeDao">
+	<sql id="SQL1">
+		where 1=1
+		<if test="p.code!=null and p.code!=''">
+			and b1.code like concat('%',#{p.code},'%')
+		</if>
+		<if test="p.name!=null and p.name!=''">
+			and b1.name like concat('%',#{p.name},'%')
+		</if>
+	
+	</sql>
+	<select id="getProductTypeList" resultType="com.crm.model.ProductType">
+		select b1.id,b1.`name`,b1.code,b1.remark,b2.name as fatherName
+		from b_product_type b1 left join b_product_type b2 
+		on b1.pid=b2.id 
+		limit #{from},#{pageSize}
+	
+	</select>
+	<select id="countProductType" resultType="int">
+		select count(id) 
+		from b_product_type
+	
+	</select>
+	<select id="findAllProductType" resultType="com.crm.model.ProductType">
+		select id,name,pid,code,remark  
+		from b_product_type
+	
+	</select>
+	<select id="findRootProductType" resultType="com.crm.model.ProductType">
+		select id,name,pid 
+		from b_product_type
+		where pid=0
+	</select>
+	<select id="findProductTypeByPid" resultType="com.crm.model.ProductType">
+		select id,name,pid 
+		from b_product_type
+		where pid=#{pid}
+	
+	</select>
+	<insert id="addProductType">
+		insert into b_product_type(name,code,pid,remark,create_time) 
+		values(#{p.name},#{p.code},#{p.pid},#{p.remark},#{p.createTime})
+	
+	</insert>
+	<select id="findProductTypeById" resultType="com.crm.model.ProductType">
+		select id,name,code,pid,remark 
+		from b_product_type 
+		where id=#{id}
+	</select>
+	<update id="updateProductType">
+		update b_product_type 
+		set name=#{p.name},code=#{p.code},pid=#{p.pid},remark=#{p.remark} 
+		where id=#{p.id}
+	</update>
+	<select id="countProductTypeByPid" resultType="int">
+		select count(id) 
+		from b_product_type 
+		where pid=#{pid}
+	
+	</select>
+	<select id="countProductByPtypeId" resultType="int">
+		select count(id) 
+		from b_product 
+		where ptype_id=#{ptypeId}
+	
+	</select>
+	<delete id="deleteProductTypeById">
+		delete from b_product_type 
+		where id=#{id}
+	
+	</delete>
+	<select id="getProductTypeList2" resultType="com.crm.model.ProductType">
+		select b1.id,b1.`name`,b1.code,b1.remark,b2.name as fatherName
+		from b_product_type b1 left join b_product_type b2 
+		on b1.pid=b2.id
+		<include refid="SQL1"></include>
+		limit #{from},#{pageSize}
+	
+	
+	</select>
+	<select id="countProductType2" resultType="int">
+		select count(id) 
+		from b_product_type b1
+		<include refid="SQL1"></include>
+	
+	</select>
+	<select id="findProductTypeByIds" resultType="com.crm.model.ProductType">
+		select id,name,pid,code,remark  
+		from b_product_type 
+		where id in
+		<foreach collection="ids" open="(" separator="," close=")" item="ids">#{ids}</foreach>
+	</select>
+	
+	
+</mapper>

@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.model.Order" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="owner_usr" property="ownerUsr" jdbcType="INTEGER" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updater" property="updater" jdbcType="VARCHAR" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="order_date" property="orderDate" jdbcType="DATE" />
+    <result column="c_id" property="cId" jdbcType="INTEGER" />
+    <result column="c_name" property="cName" jdbcType="VARCHAR" />
+    <result column="c_type" property="cType" jdbcType="VARCHAR" />
+    <result column="linkman" property="linkman" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="seller" property="seller" jdbcType="VARCHAR" />
+    <result column="total" property="total" jdbcType="DOUBLE" />
+    <result column="agio" property="agio" jdbcType="DOUBLE" />
+    <result column="agio_total" property="agioTotal" jdbcType="DOUBLE" />
+    <result column="auditor" property="auditor" jdbcType="VARCHAR" />
+    <result column="audit_date" property="auditDate" jdbcType="DATE" />
+    <result column="status_id" property="statusId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="custom1" property="custom1" jdbcType="VARCHAR" />
+    <result column="custom2" property="custom2" jdbcType="VARCHAR" />
+    <result column="custom3" property="custom3" jdbcType="VARCHAR" />
+    <result column="custom4" property="custom4" jdbcType="VARCHAR" />
+    <result column="choice1" property="choice1" jdbcType="VARCHAR" />
+    <result column="choice2" property="choice2" jdbcType="VARCHAR" />
+    <result column="choice3" property="choice3" jdbcType="VARCHAR" />
+    <result column="choice4" property="choice4" jdbcType="VARCHAR" />
+    <result column="time1" property="time1" jdbcType="TIMESTAMP" />
+    <result column="time2" property="time2" jdbcType="TIMESTAMP" />
+    <result column="share_flag" property="shareFlag" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.crm.model.Order" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+    <result column="audit_reason" property="auditReason" jdbcType="LONGVARCHAR" />
+    <result column="share_ids" property="shareIds" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, owner_usr, creater, createTime, updater, updateTime, code, order_date, c_id,
+    c_name, c_type, linkman, telephone, address, seller, total, agio, agio_total, auditor,
+    audit_date, status_id, status, custom1, custom2, custom3, custom4, choice1, choice2,
+    choice3, choice4, time1, time2, share_flag
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark, audit_reason, share_ids
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from b_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.model.Order" >
+    insert into b_order (id, owner_usr, creater,
+      createTime, updater, updateTime,
+      code, order_date, c_id,
+      c_name, c_type, linkman,
+      telephone, address, seller,
+      total, agio, agio_total,
+      auditor, audit_date, status_id,
+      status, custom1, custom2,
+      custom3, custom4, choice1,
+      choice2, choice3, choice4,
+      time1, time2, share_flag,
+      remark, audit_reason, share_ids
+      )
+    values (#{id,jdbcType=INTEGER}, #{ownerUsr,jdbcType=INTEGER}, #{creater,jdbcType=VARCHAR},
+      #{createtime,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP},
+      #{code,jdbcType=VARCHAR}, #{orderDate,jdbcType=DATE}, #{cId,jdbcType=INTEGER},
+      #{cName,jdbcType=VARCHAR}, #{cType,jdbcType=VARCHAR}, #{linkman,jdbcType=VARCHAR},
+      #{telephone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{seller,jdbcType=VARCHAR},
+      #{total,jdbcType=DOUBLE}, #{agio,jdbcType=DOUBLE}, #{agioTotal,jdbcType=DOUBLE},
+      #{auditor,jdbcType=VARCHAR}, #{auditDate,jdbcType=DATE}, #{statusId,jdbcType=VARCHAR},
+      #{status,jdbcType=VARCHAR}, #{custom1,jdbcType=VARCHAR}, #{custom2,jdbcType=VARCHAR},
+      #{custom3,jdbcType=VARCHAR}, #{custom4,jdbcType=VARCHAR}, #{choice1,jdbcType=VARCHAR},
+      #{choice2,jdbcType=VARCHAR}, #{choice3,jdbcType=VARCHAR}, #{choice4,jdbcType=VARCHAR},
+      #{time1,jdbcType=TIMESTAMP}, #{time2,jdbcType=TIMESTAMP}, #{shareFlag,jdbcType=CHAR},
+      #{remark,jdbcType=LONGVARCHAR}, #{auditReason,jdbcType=LONGVARCHAR}, #{shareIds,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.model.Order" >
+    insert into b_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ownerUsr != null" >
+        owner_usr,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="orderDate != null" >
+        order_date,
+      </if>
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cName != null" >
+        c_name,
+      </if>
+      <if test="cType != null" >
+        c_type,
+      </if>
+      <if test="linkman != null" >
+        linkman,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="seller != null" >
+        seller,
+      </if>
+      <if test="total != null" >
+        total,
+      </if>
+      <if test="agio != null" >
+        agio,
+      </if>
+      <if test="agioTotal != null" >
+        agio_total,
+      </if>
+      <if test="auditor != null" >
+        auditor,
+      </if>
+      <if test="auditDate != null" >
+        audit_date,
+      </if>
+      <if test="statusId != null" >
+        status_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="custom1 != null" >
+        custom1,
+      </if>
+      <if test="custom2 != null" >
+        custom2,
+      </if>
+      <if test="custom3 != null" >
+        custom3,
+      </if>
+      <if test="custom4 != null" >
+        custom4,
+      </if>
+      <if test="choice1 != null" >
+        choice1,
+      </if>
+      <if test="choice2 != null" >
+        choice2,
+      </if>
+      <if test="choice3 != null" >
+        choice3,
+      </if>
+      <if test="choice4 != null" >
+        choice4,
+      </if>
+      <if test="time1 != null" >
+        time1,
+      </if>
+      <if test="time2 != null" >
+        time2,
+      </if>
+      <if test="shareFlag != null" >
+        share_flag,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="auditReason != null" >
+        audit_reason,
+      </if>
+      <if test="shareIds != null" >
+        share_ids,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ownerUsr != null" >
+        #{ownerUsr,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null" >
+        #{orderDate,jdbcType=DATE},
+      </if>
+      <if test="cId != null" >
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="cName != null" >
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cType != null" >
+        #{cType,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="seller != null" >
+        #{seller,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=DOUBLE},
+      </if>
+      <if test="agio != null" >
+        #{agio,jdbcType=DOUBLE},
+      </if>
+      <if test="agioTotal != null" >
+        #{agioTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="auditor != null" >
+        #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDate != null" >
+        #{auditDate,jdbcType=DATE},
+      </if>
+      <if test="statusId != null" >
+        #{statusId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="custom1 != null" >
+        #{custom1,jdbcType=VARCHAR},
+      </if>
+      <if test="custom2 != null" >
+        #{custom2,jdbcType=VARCHAR},
+      </if>
+      <if test="custom3 != null" >
+        #{custom3,jdbcType=VARCHAR},
+      </if>
+      <if test="custom4 != null" >
+        #{custom4,jdbcType=VARCHAR},
+      </if>
+      <if test="choice1 != null" >
+        #{choice1,jdbcType=VARCHAR},
+      </if>
+      <if test="choice2 != null" >
+        #{choice2,jdbcType=VARCHAR},
+      </if>
+      <if test="choice3 != null" >
+        #{choice3,jdbcType=VARCHAR},
+      </if>
+      <if test="choice4 != null" >
+        #{choice4,jdbcType=VARCHAR},
+      </if>
+      <if test="time1 != null" >
+        #{time1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time2 != null" >
+        #{time2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shareFlag != null" >
+        #{shareFlag,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="auditReason != null" >
+        #{auditReason,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="shareIds != null" >
+        #{shareIds,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.model.Order" >
+    update b_order
+    <set >
+      <if test="ownerUsr != null" >
+        owner_usr = #{ownerUsr,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null" >
+        order_date = #{orderDate,jdbcType=DATE},
+      </if>
+      <if test="cId != null" >
+        c_id = #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="cName != null" >
+        c_name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cType != null" >
+        c_type = #{cType,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        linkman = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="seller != null" >
+        seller = #{seller,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        total = #{total,jdbcType=DOUBLE},
+      </if>
+      <if test="agio != null" >
+        agio = #{agio,jdbcType=DOUBLE},
+      </if>
+      <if test="agioTotal != null" >
+        agio_total = #{agioTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="auditor != null" >
+        auditor = #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDate != null" >
+        audit_date = #{auditDate,jdbcType=DATE},
+      </if>
+      <if test="statusId != null" >
+        status_id = #{statusId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="custom1 != null" >
+        custom1 = #{custom1,jdbcType=VARCHAR},
+      </if>
+      <if test="custom2 != null" >
+        custom2 = #{custom2,jdbcType=VARCHAR},
+      </if>
+      <if test="custom3 != null" >
+        custom3 = #{custom3,jdbcType=VARCHAR},
+      </if>
+      <if test="custom4 != null" >
+        custom4 = #{custom4,jdbcType=VARCHAR},
+      </if>
+      <if test="choice1 != null" >
+        choice1 = #{choice1,jdbcType=VARCHAR},
+      </if>
+      <if test="choice2 != null" >
+        choice2 = #{choice2,jdbcType=VARCHAR},
+      </if>
+      <if test="choice3 != null" >
+        choice3 = #{choice3,jdbcType=VARCHAR},
+      </if>
+      <if test="choice4 != null" >
+        choice4 = #{choice4,jdbcType=VARCHAR},
+      </if>
+      <if test="time1 != null" >
+        time1 = #{time1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time2 != null" >
+        time2 = #{time2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shareFlag != null" >
+        share_flag = #{shareFlag,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="auditReason != null" >
+        audit_reason = #{auditReason,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="shareIds != null" >
+        share_ids = #{shareIds,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.crm.model.Order" >
+    update b_order
+    set owner_usr = #{ownerUsr,jdbcType=INTEGER},
+    creater = #{creater,jdbcType=VARCHAR},
+    createTime = #{createtime,jdbcType=TIMESTAMP},
+    updater = #{updater,jdbcType=VARCHAR},
+    updateTime = #{updatetime,jdbcType=TIMESTAMP},
+    code = #{code,jdbcType=VARCHAR},
+    order_date = #{orderDate,jdbcType=DATE},
+    c_id = #{cId,jdbcType=INTEGER},
+    c_name = #{cName,jdbcType=VARCHAR},
+    c_type = #{cType,jdbcType=VARCHAR},
+    linkman = #{linkman,jdbcType=VARCHAR},
+    telephone = #{telephone,jdbcType=VARCHAR},
+    address = #{address,jdbcType=VARCHAR},
+    seller = #{seller,jdbcType=VARCHAR},
+    total = #{total,jdbcType=DOUBLE},
+    agio = #{agio,jdbcType=DOUBLE},
+    agio_total = #{agioTotal,jdbcType=DOUBLE},
+    auditor = #{auditor,jdbcType=VARCHAR},
+    audit_date = #{auditDate,jdbcType=DATE},
+    status_id = #{statusId,jdbcType=VARCHAR},
+    status = #{status,jdbcType=VARCHAR},
+    custom1 = #{custom1,jdbcType=VARCHAR},
+    custom2 = #{custom2,jdbcType=VARCHAR},
+    custom3 = #{custom3,jdbcType=VARCHAR},
+    custom4 = #{custom4,jdbcType=VARCHAR},
+    choice1 = #{choice1,jdbcType=VARCHAR},
+    choice2 = #{choice2,jdbcType=VARCHAR},
+    choice3 = #{choice3,jdbcType=VARCHAR},
+    choice4 = #{choice4,jdbcType=VARCHAR},
+    time1 = #{time1,jdbcType=TIMESTAMP},
+    time2 = #{time2,jdbcType=TIMESTAMP},
+    share_flag = #{shareFlag,jdbcType=CHAR},
+    remark = #{remark,jdbcType=LONGVARCHAR},
+    audit_reason = #{auditReason,jdbcType=LONGVARCHAR},
+    share_ids = #{shareIds,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.model.Order" >
+    update b_order
+    set owner_usr = #{ownerUsr,jdbcType=INTEGER},
+    creater = #{creater,jdbcType=VARCHAR},
+    createTime = #{createtime,jdbcType=TIMESTAMP},
+    updater = #{updater,jdbcType=VARCHAR},
+    updateTime = #{updatetime,jdbcType=TIMESTAMP},
+    code = #{code,jdbcType=VARCHAR},
+    order_date = #{orderDate,jdbcType=DATE},
+    c_id = #{cId,jdbcType=INTEGER},
+    c_name = #{cName,jdbcType=VARCHAR},
+    c_type = #{cType,jdbcType=VARCHAR},
+    linkman = #{linkman,jdbcType=VARCHAR},
+    telephone = #{telephone,jdbcType=VARCHAR},
+    address = #{address,jdbcType=VARCHAR},
+    seller = #{seller,jdbcType=VARCHAR},
+    total = #{total,jdbcType=DOUBLE},
+    agio = #{agio,jdbcType=DOUBLE},
+    agio_total = #{agioTotal,jdbcType=DOUBLE},
+    auditor = #{auditor,jdbcType=VARCHAR},
+    audit_date = #{auditDate,jdbcType=DATE},
+    status_id = #{statusId,jdbcType=VARCHAR},
+    status = #{status,jdbcType=VARCHAR},
+    custom1 = #{custom1,jdbcType=VARCHAR},
+    custom2 = #{custom2,jdbcType=VARCHAR},
+    custom3 = #{custom3,jdbcType=VARCHAR},
+    custom4 = #{custom4,jdbcType=VARCHAR},
+    choice1 = #{choice1,jdbcType=VARCHAR},
+    choice2 = #{choice2,jdbcType=VARCHAR},
+    choice3 = #{choice3,jdbcType=VARCHAR},
+    choice4 = #{choice4,jdbcType=VARCHAR},
+    time1 = #{time1,jdbcType=TIMESTAMP},
+    time2 = #{time2,jdbcType=TIMESTAMP},
+    share_flag = #{shareFlag,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <sql id="SQL">
+    WHERE 1=1
+    <if test="order.code != null and order.code != ''">
+      AND code LIKE concat('%',#{order.code},'%')
+    </if>
+    <if test="order.seller != null and order.seller != ''">
+      AND seller LIKE concat('%',#{order.seller},'%')
+    </if>
+    <if test="order.cName != null and order.cName != ''">
+      AND cName LIKE concat('%',#{order.cName},'%')
+    </if>
+  </sql>
+
+
+  <select id="getOderList" resultType="com.crm.model.Order">
+    SELECT id,code,order_date orderDate,c_name cName,seller,total,agio,agio_total agioTotal,auditor,status
+    FROM b_order
+    <include refid="SQL"></include>
+    limit #{from},#{pageSize}
+  </select>
+
+  <select id="countOrder" resultType="int">
+    SELECT count(id)
+    FROM b_order
+    <include refid="SQL"></include>
+  </select>
+
+  <select id="getSalesman" resultType="com.crm.model.Suser">
+    SELECT id,name
+    FROM s_user
+    WHERE role_id = 4
+  </select>
+
+
+  <select id="findOrderById" resultType="com.crm.model.Order">
+    SELECT id,code,order_date orderDate,c_name cName,c_id cId,seller,linkman,telephone,address,
+    remark,createTime,updateTime,creater,updater
+    FROM b_order
+    WHERE id=#{orderId}
+  </select>
+
+
+  <insert id="addOrder" useGeneratedKeys="true" keyProperty="o.id">
+    INSERT INTO  b_order
+    (code,order_date ,c_name ,
+    seller,linkman,telephone,address,
+    remark,createTime,updateTime,creater,updater,owner_usr,c_id)
+    VALUES (#{o.code},#{o.orderDate},#{o.cName},
+    #{o.seller},#{o.linkman},#{o.telephone},#{o.address},
+    #{o.remark},#{o.createTime},#{o.updateTime},#{o.creater},#{o.updater},4,7)
+  </insert>
+
+
+
+  <update id="updateOrder">
+    UPDATE b_order
+    SET code = #{o.code},order_date  = #{o.orderDate},c_name  = #{o.cName},
+    seller = #{o.seller},linkman = #{o.linkman},telephone = #{o.telephone},address = #{o.address},
+    remark = #{o.remark},createTime = #{o.createTime},updateTime = #{o.updateTime},creater = #{o.creater},
+    updater = #{o.updater},owner_usr = 4,c_id = 7
+    where id=#{o.id}
+  </update>
+
+  <select id="findOrderByIds" resultType="com.crm.model.Order">
+    SELECT id,code FROM b_order
+    WHERE id IN
+    <foreach collection="ids" open="(" separator="," close=")" item="ids">#{ids}</foreach>
+  </select>
+
+  <select id="findAllOrder" resultType="com.crm.model.Order">
+  SELECT id,code FROM b_order
+  </select>
+
+
+  <delete id="delOrderListByIds">
+    DELETE FROM b_order WHERE id = #{id}
+  </delete>
+
+  <select id="findOrderDetailById" resultType="com.crm.model.OrderDetail">
+    SELECT id,p_name pName,spec,unit,amount,price,agio,total,remark,order_id orderId,p_id pId
+    FROM b_order_detail
+    WHERE order_id=#{id}
+  </select>
+
+  <insert id="addOrderDetail">
+    INSERT INTO b_order_detail
+    (id,p_name,spec,unit,amount,price,agio,total,remark,order_id ,p_id)
+    VALUES
+    (#{od.id},#{od.pName},#{od.spec},#{od.unit},#{od.amount},#{od.price},#{od.agio},#{od.total},
+    #{od.remark},#{od.orderId},#{od.pId})
+  </insert>
+
+  <update id="updateOrderDetail">
+    UPDATE b_order_detail
+    SET id = #{od.id},p_name = #{od.pName},spec = #{od.spec},unit = #{od.unit},
+    amount = #{od.amount},price = #{od.price},agio = #{od.agio},total = #{od.total},
+    remark = #{od.remark},order_id = #{od.orderId},p_id =#{od.pId}
+    WHERE id = #{od.id}
+  </update>
+
+  <select id="getOrderId" resultType="int">
+    SELECT id,order_id orderId
+    FROM b_order
+    WHERE createTime = #{o.createTime}
+  </select>
+</mapper>

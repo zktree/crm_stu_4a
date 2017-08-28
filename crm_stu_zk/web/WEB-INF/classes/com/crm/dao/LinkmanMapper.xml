@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crm.dao.LinkmanMapper" >
+  <resultMap id="BaseResultMap" type="com.crm.model.Linkman" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="pycode" property="pycode" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="duty" property="duty" jdbcType="VARCHAR" />
+    <result column="office_tel" property="officeTel" jdbcType="VARCHAR" />
+    <result column="home_tel" property="homeTel" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="qq_num" property="qqNum" jdbcType="VARCHAR" />
+    <result column="qq_name" property="qqName" jdbcType="VARCHAR" />
+    <result column="postcode" property="postcode" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="fax" property="fax" jdbcType="VARCHAR" />
+    <result column="other_link" property="otherLink" jdbcType="VARCHAR" />
+    <result column="hobby" property="hobby" jdbcType="VARCHAR" />
+    <result column="taboo" property="taboo" jdbcType="VARCHAR" />
+    <result column="main_flag" property="mainFlag" jdbcType="CHAR" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater" property="updater" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="custom1" property="custom1" jdbcType="VARCHAR" />
+    <result column="custom2" property="custom2" jdbcType="VARCHAR" />
+    <result column="custom3" property="custom3" jdbcType="VARCHAR" />
+    <result column="custom4" property="custom4" jdbcType="VARCHAR" />
+    <result column="choice1" property="choice1" jdbcType="VARCHAR" />
+    <result column="choice2" property="choice2" jdbcType="VARCHAR" />
+    <result column="choice3" property="choice3" jdbcType="VARCHAR" />
+    <result column="choice4" property="choice4" jdbcType="VARCHAR" />
+    <result column="time1" property="time1" jdbcType="TIMESTAMP" />
+    <result column="time2" property="time2" jdbcType="TIMESTAMP" />
+    <result column="m_type" property="mType" jdbcType="VARCHAR" />
+    <result column="share_flag" property="shareFlag" jdbcType="CHAR" />
+    <result column="c_id" property="cId" jdbcType="INTEGER" />
+    <result column="owner_usr" property="ownerUsr" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.crm.model.Linkman" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+    <result column="share_ids" property="shareIds" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, pycode, code, sex, birthday, department, duty, office_tel, home_tel, mobile, 
+    email, qq_num, qq_name, postcode, address, fax, other_link, hobby, taboo, main_flag, 
+    creater, create_time, updater, update_time, custom1, custom2, custom3, custom4, choice1, 
+    choice2, choice3, choice4, time1, time2, m_type, share_flag, c_id, owner_usr
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark, share_ids
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from c_company_linkman
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from c_company_linkman
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crm.model.Linkman" >
+    insert into c_company_linkman (id, name, pycode, 
+      code, sex, birthday, department, 
+      duty, office_tel, home_tel, 
+      mobile, email, qq_num, 
+      qq_name, postcode, address, 
+      fax, other_link, hobby, 
+      taboo, main_flag, creater, 
+      create_time, updater, update_time, 
+      custom1, custom2, custom3, 
+      custom4, choice1, choice2, 
+      choice3, choice4, time1, 
+      time2, m_type, share_flag, 
+      c_id, owner_usr, remark,
+      share_ids)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{pycode,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{department,jdbcType=VARCHAR}, 
+      #{duty,jdbcType=VARCHAR}, #{officeTel,jdbcType=VARCHAR}, #{homeTel,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{qqNum,jdbcType=VARCHAR}, 
+      #{qqName,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{fax,jdbcType=VARCHAR}, #{otherLink,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR}, 
+      #{taboo,jdbcType=VARCHAR}, #{mainFlag,jdbcType=CHAR}, #{creater,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{custom1,jdbcType=VARCHAR}, #{custom2,jdbcType=VARCHAR}, #{custom3,jdbcType=VARCHAR}, 
+      #{custom4,jdbcType=VARCHAR}, #{choice1,jdbcType=VARCHAR}, #{choice2,jdbcType=VARCHAR}, 
+      #{choice3,jdbcType=VARCHAR}, #{choice4,jdbcType=VARCHAR}, #{time1,jdbcType=TIMESTAMP}, 
+      #{time2,jdbcType=TIMESTAMP}, #{mType,jdbcType=VARCHAR}, #{shareFlag,jdbcType=CHAR}, 
+      #{cId,jdbcType=INTEGER}, #{ownerUsr,jdbcType=INTEGER}, #{remark,jdbcType=LONGVARCHAR}, 
+      #{shareIds,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.crm.model.Linkman" >
+    insert into c_company_linkman
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="pycode != null" >
+        pycode,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="duty != null" >
+        duty,
+      </if>
+      <if test="officeTel != null" >
+        office_tel,
+      </if>
+      <if test="homeTel != null" >
+        home_tel,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="qqNum != null" >
+        qq_num,
+      </if>
+      <if test="qqName != null" >
+        qq_name,
+      </if>
+      <if test="postcode != null" >
+        postcode,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="fax != null" >
+        fax,
+      </if>
+      <if test="otherLink != null" >
+        other_link,
+      </if>
+      <if test="hobby != null" >
+        hobby,
+      </if>
+      <if test="taboo != null" >
+        taboo,
+      </if>
+      <if test="mainFlag != null" >
+        main_flag,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="custom1 != null" >
+        custom1,
+      </if>
+      <if test="custom2 != null" >
+        custom2,
+      </if>
+      <if test="custom3 != null" >
+        custom3,
+      </if>
+      <if test="custom4 != null" >
+        custom4,
+      </if>
+      <if test="choice1 != null" >
+        choice1,
+      </if>
+      <if test="choice2 != null" >
+        choice2,
+      </if>
+      <if test="choice3 != null" >
+        choice3,
+      </if>
+      <if test="choice4 != null" >
+        choice4,
+      </if>
+      <if test="time1 != null" >
+        time1,
+      </if>
+      <if test="time2 != null" >
+        time2,
+      </if>
+      <if test="mType != null" >
+        m_type,
+      </if>
+      <if test="shareFlag != null" >
+        share_flag,
+      </if>
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="ownerUsr != null" >
+        owner_usr,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="shareIds != null" >
+        share_ids,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pycode != null" >
+        #{pycode,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null" >
+        #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="officeTel != null" >
+        #{officeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="homeTel != null" >
+        #{homeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qqNum != null" >
+        #{qqNum,jdbcType=VARCHAR},
+      </if>
+      <if test="qqName != null" >
+        #{qqName,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="otherLink != null" >
+        #{otherLink,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null" >
+        #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="taboo != null" >
+        #{taboo,jdbcType=VARCHAR},
+      </if>
+      <if test="mainFlag != null" >
+        #{mainFlag,jdbcType=CHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="custom1 != null" >
+        #{custom1,jdbcType=VARCHAR},
+      </if>
+      <if test="custom2 != null" >
+        #{custom2,jdbcType=VARCHAR},
+      </if>
+      <if test="custom3 != null" >
+        #{custom3,jdbcType=VARCHAR},
+      </if>
+      <if test="custom4 != null" >
+        #{custom4,jdbcType=VARCHAR},
+      </if>
+      <if test="choice1 != null" >
+        #{choice1,jdbcType=VARCHAR},
+      </if>
+      <if test="choice2 != null" >
+        #{choice2,jdbcType=VARCHAR},
+      </if>
+      <if test="choice3 != null" >
+        #{choice3,jdbcType=VARCHAR},
+      </if>
+      <if test="choice4 != null" >
+        #{choice4,jdbcType=VARCHAR},
+      </if>
+      <if test="time1 != null" >
+        #{time1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time2 != null" >
+        #{time2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mType != null" >
+        #{mType,jdbcType=VARCHAR},
+      </if>
+      <if test="shareFlag != null" >
+        #{shareFlag,jdbcType=CHAR},
+      </if>
+      <if test="cId != null" >
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="ownerUsr != null" >
+        #{ownerUsr,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="shareIds != null" >
+        #{shareIds,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crm.model.Linkman" >
+    update c_company_linkman
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pycode != null" >
+        pycode = #{pycode,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null" >
+        duty = #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="officeTel != null" >
+        office_tel = #{officeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="homeTel != null" >
+        home_tel = #{homeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qqNum != null" >
+        qq_num = #{qqNum,jdbcType=VARCHAR},
+      </if>
+      <if test="qqName != null" >
+        qq_name = #{qqName,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="otherLink != null" >
+        other_link = #{otherLink,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null" >
+        hobby = #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="taboo != null" >
+        taboo = #{taboo,jdbcType=VARCHAR},
+      </if>
+      <if test="mainFlag != null" >
+        main_flag = #{mainFlag,jdbcType=CHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="custom1 != null" >
+        custom1 = #{custom1,jdbcType=VARCHAR},
+      </if>
+      <if test="custom2 != null" >
+        custom2 = #{custom2,jdbcType=VARCHAR},
+      </if>
+      <if test="custom3 != null" >
+        custom3 = #{custom3,jdbcType=VARCHAR},
+      </if>
+      <if test="custom4 != null" >
+        custom4 = #{custom4,jdbcType=VARCHAR},
+      </if>
+      <if test="choice1 != null" >
+        choice1 = #{choice1,jdbcType=VARCHAR},
+      </if>
+      <if test="choice2 != null" >
+        choice2 = #{choice2,jdbcType=VARCHAR},
+      </if>
+      <if test="choice3 != null" >
+        choice3 = #{choice3,jdbcType=VARCHAR},
+      </if>
+      <if test="choice4 != null" >
+        choice4 = #{choice4,jdbcType=VARCHAR},
+      </if>
+      <if test="time1 != null" >
+        time1 = #{time1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time2 != null" >
+        time2 = #{time2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mType != null" >
+        m_type = #{mType,jdbcType=VARCHAR},
+      </if>
+      <if test="shareFlag != null" >
+        share_flag = #{shareFlag,jdbcType=CHAR},
+      </if>
+      <if test="cId != null" >
+        c_id = #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="ownerUsr != null" >
+        owner_usr = #{ownerUsr,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="shareIds != null" >
+        share_ids = #{shareIds,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.crm.model.Linkman" >
+    update c_company_linkman
+    set name = #{name,jdbcType=VARCHAR},
+      pycode = #{pycode,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      department = #{department,jdbcType=VARCHAR},
+      duty = #{duty,jdbcType=VARCHAR},
+      office_tel = #{officeTel,jdbcType=VARCHAR},
+      home_tel = #{homeTel,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      qq_num = #{qqNum,jdbcType=VARCHAR},
+      qq_name = #{qqName,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      other_link = #{otherLink,jdbcType=VARCHAR},
+      hobby = #{hobby,jdbcType=VARCHAR},
+      taboo = #{taboo,jdbcType=VARCHAR},
+      main_flag = #{mainFlag,jdbcType=CHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      custom1 = #{custom1,jdbcType=VARCHAR},
+      custom2 = #{custom2,jdbcType=VARCHAR},
+      custom3 = #{custom3,jdbcType=VARCHAR},
+      custom4 = #{custom4,jdbcType=VARCHAR},
+      choice1 = #{choice1,jdbcType=VARCHAR},
+      choice2 = #{choice2,jdbcType=VARCHAR},
+      choice3 = #{choice3,jdbcType=VARCHAR},
+      choice4 = #{choice4,jdbcType=VARCHAR},
+      time1 = #{time1,jdbcType=TIMESTAMP},
+      time2 = #{time2,jdbcType=TIMESTAMP},
+      m_type = #{mType,jdbcType=VARCHAR},
+      share_flag = #{shareFlag,jdbcType=CHAR},
+      c_id = #{cId,jdbcType=INTEGER},
+      owner_usr = #{ownerUsr,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=LONGVARCHAR},
+      share_ids = #{shareIds,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crm.model.Linkman" >
+    update c_company_linkman
+    set name = #{name,jdbcType=VARCHAR},
+      pycode = #{pycode,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      department = #{department,jdbcType=VARCHAR},
+      duty = #{duty,jdbcType=VARCHAR},
+      office_tel = #{officeTel,jdbcType=VARCHAR},
+      home_tel = #{homeTel,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      qq_num = #{qqNum,jdbcType=VARCHAR},
+      qq_name = #{qqName,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      other_link = #{otherLink,jdbcType=VARCHAR},
+      hobby = #{hobby,jdbcType=VARCHAR},
+      taboo = #{taboo,jdbcType=VARCHAR},
+      main_flag = #{mainFlag,jdbcType=CHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      custom1 = #{custom1,jdbcType=VARCHAR},
+      custom2 = #{custom2,jdbcType=VARCHAR},
+      custom3 = #{custom3,jdbcType=VARCHAR},
+      custom4 = #{custom4,jdbcType=VARCHAR},
+      choice1 = #{choice1,jdbcType=VARCHAR},
+      choice2 = #{choice2,jdbcType=VARCHAR},
+      choice3 = #{choice3,jdbcType=VARCHAR},
+      choice4 = #{choice4,jdbcType=VARCHAR},
+      time1 = #{time1,jdbcType=TIMESTAMP},
+      time2 = #{time2,jdbcType=TIMESTAMP},
+      m_type = #{mType,jdbcType=VARCHAR},
+      share_flag = #{shareFlag,jdbcType=CHAR},
+      c_id = #{cId,jdbcType=INTEGER},
+      owner_usr = #{ownerUsr,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <sql id="SQL1">
+    WHERE c_id = #{l.cId}
+    <if test="l.name!=null and l.name!=''">
+      and l.name like concat('%',#{l.name},'%')
+    </if>
+    <if test="l.department!=null and l.department!=''">
+      and l.department like concat('%',#{l.department},'%')
+    </if>
+    <if test="l.homeTel!=null and l.homeTel!=''">
+      and l.home_tel like concat('%',#{l.homeTel},'%')
+    </if>
+    <if test="l.name!=null and l.name!=''">
+      and l.name like concat('%',#{l.name},'%')
+    </if>
+    <if test="l.duty!=null and l.duty!=''">
+      and l.duty like concat('%',#{l.duty},'%')
+    </if>
+    <if test="l.qqName!=null and l.qqName!=''">
+      and l.qqName like concat('%',#{l.qqName},'%')
+    </if>
+    <if test="l.officeTel!=null and l.officeTel!=''">
+      and l.officeTel like concat('%',#{l.officeTel},'%')
+    </if>
+    <if test="l.email!=null and l.email!=''">
+      and l.email like concat('%',#{l.email},'%')
+    </if>
+    <if test="l.ownerUsr!=null and l.ownerUsr!=''">
+      and l.owner_usr like concat('%',#{l.ownerUsr},'%')
+    </if>
+    <if test="l.mobile!=null and l.mobile!=''">
+      and l.mobile like concat('%',#{l.mobile},'%')
+    </if>
+
+  </sql>
+
+  <select id="getLinkmanList" resultType="com.crm.model.Linkman">
+    SELECT l.`name`,l.sex, l.mobile,l.office_tel officeTel,l.email,l.qq_num qqNum,l.department,l.duty
+    FROM c_company_linkman AS l
+    <include refid="SQL1"></include>
+    limit #{from},#{pageSize}
+  </select>
+
+  <select id="countLinkman" resultType="int">
+    select count(l.id)
+    from c_company_linkman l
+    <include refid="SQL1"></include>
+  </select>
+
+</mapper>
