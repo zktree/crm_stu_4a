@@ -27,4 +27,6 @@ public interface NeedGatherMapper {
     List<NeedGather> findAllOrder();
 
     List<NeedGather> findOrderByIds(@Param("ids") Integer[] needGather_id);
+
+    void delOrderListByIds(@Param("id") int id);
 }

@@ -3,7 +3,6 @@ package com.crm.service.impl;
 import com.crm.dao.NeedGatherMapper;
 import com.crm.model.DataModel;
 import com.crm.model.NeedGather;
-import com.crm.model.Order;
 import com.crm.model.Pager;
 import com.crm.service.NeedGatherService;
 import jxl.Workbook;
@@ -103,7 +102,12 @@ public class NeedGatherServiceImpl implements NeedGatherService {
     }
 
     @Override
-    public void delListByIds(NeedGather needGather) {
-
+    public void delListByIds(Integer[] needGather_id) {
+        if (needGather_id != null){
+            for (int i = 0;i < needGather_id.length;i++){
+                int id = needGather_id[i];
+                needGatherMapper.delOrderListByIds(id);
+            }
+        }
     }
 }

@@ -15,5 +15,5 @@ public interface NeedGatherService {
 
     void exportExcel(String exportType, HttpServletResponse response, Pager pager, NeedGather needGather, Integer[] needGather_id);
 
-    void delListByIds(NeedGather needGather);
+    void delListByIds(Integer[] needGather);
 }

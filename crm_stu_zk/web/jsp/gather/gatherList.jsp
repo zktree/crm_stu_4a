@@ -46,6 +46,16 @@
             }
 
         }
+        //判断列表复选框选中个数是否大于0，是：返回个数，否：返回0
+        function checkBoxNum(){
+            if($("input[name='needGather_id']:checked").length > 0){
+                return $("input[name='needGather_id']:checked").length;
+            }else{
+                return 0;
+            }
+        }
+
+
         function toDel(){
             var cbNum = checkBoxNum();
             if(cbNum > 0){
@@ -195,7 +205,8 @@
 
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" id="index_main_div1">
 					<tr>
-						<td height="21" background="image/index_main_div_titleBg.gif"><img style="margin-left:5px;" src="image/index_main_div_left.gif" width="6" height="2" align="absmiddle">&nbsp;<span style="font-weight:bold;font-size:12px;">应收款搜索</span></td>
+						<td height="21" background="image/index_main_div_titleBg.gif">
+							<img style="margin-left:5px;" src="image/index_main_div_left.gif" width="6" height="2" align="absmiddle">&nbsp;<span style="font-weight:bold;font-size:12px;">应收款搜索</span></td>
 					</tr>
 					<tr>
 						<td height="56" align="left" valign="top" bgcolor="#f7fbfc">
@@ -256,11 +267,15 @@
 						<td height="10" bgcolor="#f7fbfc">&nbsp;</td>
 					</tr>
 					<tr>
-						<td height="11"><img src="image/t1.gif" align="absmiddle"> <span style="font-size:14; font-weight:bold;">应收款列表</span></td>
+						<td height="11">
+							<img src="image/t1.gif" align="absmiddle"> <span style="font-size:14; font-weight:bold;">
+							应收款列表</span></td>
 					</tr>
 					<tr>
 						<td height="16" valign="top"><br/>
-							<img src="image/s3.gif" width="62" height="22"></td>
+							<img src="image/s3.gif" width="62" height="22">
+							<img src="image/s7.gif" width="59" height="22" alt="删除按钮" onclick="toDel();">
+						</td>
 					</tr>
 					<tr>
 						<td height="5" valign="top"></td>

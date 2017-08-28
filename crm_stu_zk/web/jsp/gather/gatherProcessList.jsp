@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 		 pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -15,6 +16,24 @@
 	<script src="css_js/popup4exExcel.js" type="text/javascript"></script>
 	<link href="css_js/general.css" rel="stylesheet" type="text/css"></link>
 	<script type="text/javascript">
+        $(function(){
+            //获得每页显示几条数据
+            var pageSize="${pager.pageSize}";
+            //获得所有选项
+            var options=$("#_pageSize_down option");
+            //遍历所有选项
+            for(var i=0;i<options.length;i++){
+                //如果pageSize==某个选项的value值
+                if(pageSize==$(options[i]).val()){
+                    $(options[i]).attr("selected","selected");//添加选中
+                    break;//for结束
+                }
+            }
+
+
+        });
+
+
         function initPageSize(){
             var pageSizes = document.getElementsByName("_pageSize");
             for(var o = 0; o < pageSizes.length; o++){
@@ -26,6 +45,16 @@
             }
 
         }
+        //判断列表复选框选中个数是否大于0，是：返回个数，否：返回0
+        function checkBoxNum(){
+            if($("input[name='gather_id']:checked").length > 0){
+                return $("input[name='gather_id']:checked").length;
+            }else{
+                return 0;
+            }
+        }
+
+
         function toDel(){
             var cbNum = checkBoxNum();
             if(cbNum > 0){
@@ -38,13 +67,55 @@
             }
         }
         //判断列表复选框选中个数是否大于0，是：返回个数，否：返回0
-        function checkBoxNum(){
-            if($("input[name='product_id']:checked").length > 0){
-                return $("input[name='product_id']:checked").length;
-            }else{
-                return 0;
-            }
+        function dataempty() {
+            $("input[class='inputTextStyle']").val("");
         }
+
+        //改变选中数目
+        function changeNum() {
+            //获得选中的数目
+            var num=$("input[name='gather_id']:checked").length;
+            //获得所有多选框的数目
+            var totalnum=$("input[name='gather_id']").length;
+            //给选择条目赋值
+            $("#selected_num1").text(num);
+            $("#selected_num2").text(num);
+
+            if(num==totalnum){
+                $("#ids").attr("checked",true);
+            }else{
+                $("#ids").attr("checked",false);
+            }
+
+        }
+
+
+        //全选
+        function toChange() {
+            //获得是否选中
+            var flag=$("#ids").attr("checked");
+            //根据上边多选框状态改变下边多选框状态
+            $("input[name='gather_id']").attr("checked",flag);
+
+            //获得选中的数目
+            var num=$("input[name='gather_id']:checked").length;
+            //给选择条目赋值
+            $("#selected_num1").text(num);
+            $("#selected_num2").text(num);
+
+        }
+
+
+        function toUrl2(select_id){
+
+            var num=$("#"+select_id+" option:selected").val();
+            $("#hiddenPageSize").val(num);
+            $("#hiddenPageNum").val(1);//把页码改为1
+            document.forms[0].submit();
+
+        }
+
+
         function toUrl(pageNumId,pageSizeId){
             var _pageNum,_pageSize;
             if(pageNumId != "_null"){
@@ -71,8 +142,11 @@
         function nextPage(){
             var hiddenPageNum = document.getElementById("hiddenPageNum");
             if("" != hiddenPageNum.value){
-                hiddenPageNum.value = hiddenPageNum.value - 0 + 1;
-                document.forms[0].submit();
+                var totalNum="${pager.totalPage}";//总页数
+                if((hiddenPageNum.value-0)<(totalNum-0)){
+                    hiddenPageNum.value = hiddenPageNum.value - 0 + 1;
+                    document.forms[0].submit();
+                }
             }
         }
         function prePage(){
@@ -113,11 +187,10 @@
 </head>
 <body onload="initPageSize()">
 <form name="load4GatherMain.action" method="post" name="form1" id="form1">
-	<input type="hidden" name="pageNum" value="${pager.page}" id="hiddenPageNum" />
-	<input type="hidden" name="pageSize" value="${pageSize}"
-		   id="hiddenPageSize" /> <input type="hidden" name="isDel" value=""
-										 id="isDel" /> <input type="hidden" name="exportType" value=""
-															  id="exportType" />
+	<input type="hidden" name="page" value="${pager.page}" id="hiddenPageNum" />
+	<input type="hidden" name="pageSize" value="${pager.pageSize}" id="hiddenPageSize" />
+	<input type="hidden" name="isDel" value="" id="isDel" />
+	<input type="hidden" name="exportType" value="" id="exportType" />
 	<table width="99%" border="0" cellspacing="0" cellpadding="0" id="index_content">
 		<tr>
 			<td valign="middle" >
@@ -139,22 +212,25 @@
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%" id="selectTable">
 								<tr>
 									<td width="11%">客户名称:</td>
-									<td width="17%"><input type="text" name="textfield" class="inputTextStyle"></td>
+									<td width="17%"><input type="text" name="cName" class="inputTextStyle"></td>
 									<td width="11%">收款单号:</td>
-									<td width="17%"><input type="text" name="textfield4" class="inputTextStyle"></td>
+									<td width="17%"><input type="text" name="billCode" class="inputTextStyle"></td>
 									<td width="11%">收款时间:</td>
-									<td width="17%"><input type="text" name="textfield42" class="inputTextStyle"></td>
+									<td width="17%"><input type="text" name="payDate" class="inputTextStyle"></td>
 									<td width="5%"><img src="image/s1.gif" width="59" height="22"></td>
 									<td width="10%" align="left"><img src="image/s2.gif" width="62" height="22"></td>
 									<td width="1%" align="left">&nbsp;</td>
 								</tr>
 								<tr>
 									<td>经手人:</td>
-									<td><select name="select3" class="selectOptionStyle">
-										<option value="-1" selected="selected">---</option>
-										<option value="1">重要客户</option>
-										<option value="2">潜在客户</option>
-									</select></td>
+									<td>
+										<select name="select3" class="selectOptionStyle">
+											<option value="">----</option>
+											<c:forEach items="${users}" var="user">
+												<option value="${user.id}">${user.name}</option>
+											</c:forEach>
+										</select>
+									</td>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
@@ -179,7 +255,9 @@
 					</tr>
 					<tr>
 						<td height="16" valign="top"><br/>
-							<img src="image/s3.gif" width="62" height="22"></td>
+							<img src="image/s3.gif" width="62" height="22">
+							<img src="image/s7.gif" width="59" height="22" alt="删除按钮" onclick="toDel();">
+						</td>
 					</tr>
 					<tr>
 						<td height="5" valign="top"></td>
@@ -188,53 +266,50 @@
 						<td height="28" valign="top">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" id="selectTable_content">
 								<tr>
-									<td width="40%" height="19" bgcolor="#f2faff"
-										style="font-size: 12px;">&nbsp;<img src="image/t2.gif"
-																			align="absmiddle" width="15" height="16"> <span
-											onclick="exportExcel()" class="pager" style="cursor: pointer">导出
-						</span> | 选择条目:0</td>
+									<td width="40%" height="19" bgcolor="#f2faff" style="font-size: 12px;">&nbsp;
+										<img src="image/t2.gif" align="absmiddle" width="15" height="16">
+										<span onclick="exportExcel()" class="pager" style="cursor: pointer">导出</span>
+										| 选择条目:<span id="selected_num1">0</span>
+									</td>
 									<td width="3%" bgcolor="#f2faff" style="font-size: 12px;">&nbsp;</td>
-									<td width="57%" bgcolor="#f2faff" align="right"
-										style="font-size: 12px;">共${pager.totalRecord}条 <span
-											class="pager" onclick="firstPage();" style="cursor: pointer">首页</span>
+									<td width="57%" bgcolor="#f2faff" align="right" style="font-size: 12px;">共${pager.totalRecord}条
+										<span class="pager" onclick="firstPage();" style="cursor: pointer">首页</span>
 										<span class="pager" onclick="prePage();" style="cursor: pointer">上一页</span>
-										${pager.page}/${pager.totalPage} <span onclick="nextPage()"
-																			   class="pager" style="cursor: pointer">下一页</span> <span
-												onclick="lastPage()" class="pager" style="cursor: pointer">末页</span>
-										<select name="_pageNum" onchange="toUrl('_pageNum_up','_null');"
-												id="_pageNum_up">
-											<s:bean name="org.apache.struts2.util.Counter" id="counter">
-												<s:param name="first" value="0" />
-												<s:param name="last" value="#request.pager.totalPage-1" />
-												<s:iterator>
-													<s:if test="#counter.current==#request.pager.page">
-														<option value="${counter.current}" selected="selected">第${counter.current}页</option>
-													</s:if>
-													<s:else>
-														<option value="${counter.current}">第${counter.current}页</option>
-													</s:else>
-												</s:iterator>
-											</s:bean>
-										</select> <select name="_pageSize" onchange="toUrl('_null','_pageSize_up')"
-														  id="_pageSize_up">
-											<option value="5">5条</option>
-											<option value="6">6条</option>
-											<option value="7">7条</option>
-											<option value="8">8条</option>
-											<option value="9">9条</option>
-											<option value="10">10条</option>
-											<option value="15">15条</option>
-											<option value="20">20条</option>
-											<option value="25">25条</option>
-											<option value="30">30条</option>
-											<option value="50">50条</option>
-										</select></td>
+										${pager.page}/${pager.totalPage}
+										<span onclick="nextPage()" class="pager" style="cursor: pointer">下一页</span>
+										<span onclick="lastPage()" class="pager" style="cursor: pointer">末页</span>
+										<select name="_pageNum" onchange="toUrl('_pageNum_up','_null');" id="_pageNum_up">
+											<c:forEach begin="1" end="${pager.totalPage}" varStatus="sta">
+												<option value="${sta.index }" <c:if test="${pager.page==sta.index }">selected="selected"
+												</c:if>>第${sta.index }页</option>
+											</c:forEach>
+
+
+
+
+										</select>
+										<select name="_pageSize" onchange="toUrl2('_pageSize_up')" id="_pageSize_up">
+											<option value="5" <c:if test="${pager.pageSize==5 }">selected="selected"</c:if>>5条</option>
+											<option value="6" <c:if test="${pager.pageSize==6 }">selected="selected"</c:if>>6条</option>
+											<option value="7" <c:if test="${pager.pageSize==7 }">selected="selected"</c:if>>7条</option>
+											<option value="8" <c:if test="${pager.pageSize==8 }">selected="selected"</c:if>>8条</option>
+											<option value="9" <c:if test="${pager.pageSize==9 }">selected="selected"</c:if>>9条</option>
+											<option value="10" <c:if test="${pager.pageSize==10 }">selected="selected"</c:if>>10条</option>
+											<option value="15" <c:if test="${pager.pageSize==15 }">selected="selected"</c:if>>15条</option>
+											<option value="20" <c:if test="${pager.pageSize==20 }">selected="selected"</c:if>>20条</option>
+											<option value="25" <c:if test="${pager.pageSize==25 }">selected="selected"</c:if>>25条</option>
+											<option value="30" <c:if test="${pager.pageSize==30 }">selected="selected"</c:if>>30条</option>
+											<option value="50" <c:if test="${pager.pageSize==50 }">selected="selected"</c:if>>50条</option>
+										</select>
+									</td>
 								</tr>
 								<tr>
 									<td colspan="3" bgcolor="#f2faff">
 										<table width="100%" border="0" cellspacing="0" cellpadding="0" id="select_row">
 											<tr>
-												<td width="4%" height="28" align="center" background="image/select_title_title.jpg"><input type="checkbox" name="checkbox" value="checkbox"></td>
+												<td width="4%" height="28" align="center" background="image/select_title_title.jpg">
+													<input type="checkbox" name="checkbox" value="checkbox" id="ids" onclick="toChange()">
+												</td>
 												<td width="18%" align="left" background="image/select_title_title.jpg"><strong>收款单号</strong></td>
 												<td width="22%" align="center" background="image/select_title_title.jpg"><strong>收款日期</strong></td>
 												<td width="18%" align="center" background="image/select_title_title.jpg"><strong>客户名称</strong></td>
@@ -243,34 +318,38 @@
 												<td width="9%" align="center" background="image/select_title_title.jpg"><strong>单据状态</strong></td>
 											</tr>
 
-											<s:iterator value="#request.gatherList" id="bgather">
+											<c:forEach items="${gatherList}" var="gather">
 												<tr class="select_content_bg">
-													<td align="center"><s:if test="#session.gather_ids==null">
+													<%--<td align="center">--%>
+														<%--<s:if test="#session.gather_ids==null">--%>
 
-														<input type="checkbox" name="gather_id"
-															   value="${bgather.id}">
-													</s:if> <s:else>
-														<s:set name="flag" value="1" />
-														<s:iterator value="#session.gather_ids" id="c_ids">
-															<s:if test="#c_ids==#bgather.id">
-																<input type="checkbox" name="gather_id"
-																	   value="${bgather.id}" checked="checked">
-																<s:set name="flag" value="0" />
-															</s:if>
-														</s:iterator>
-														<s:if test="#flag == 1">
-															<input type="checkbox" name="gather_id"
-																   value="${bgather.id}">
-														</s:if>
-													</s:else></td>
-													<td><a href="load4EditGather.action?edit_id=${bgather.id}&CId=${bgather.CId}" class="normal">${bgather.code }</a></td>
-													<td align="center">${bgather.payDate }</td>
-													<td align="center">${bgather.CName }</td>
-													<td align="center">${bgather.total }</td>
-													<td align="center">${bgather.handler }</td>
-													<td align="center">${bgather.status }</td>
+															<%--<input type="checkbox" name="gather_id" value="${gather.id}">--%>
+														<%--</s:if>--%>
+														<%--<s:else>--%>
+															<%--<s:set name="flag" value="1" />--%>
+															<%--<s:iterator value="#session.gather_ids" id="c_ids">--%>
+																<%--<s:if test="#c_ids==#bgather.id">--%>
+																	<%--<input type="checkbox" name="gather_id" value="${gather.id}" checked="checked">--%>
+																	<%--<s:set name="flag" value="0" />--%>
+																<%--</s:if>--%>
+															<%--</s:iterator>--%>
+															<%--<s:if test="#flag == 1">--%>
+																<%--<input type="checkbox" name="gather_id"--%>
+																	   <%--value="${bgather.id}">--%>
+															<%--</s:if>--%>
+														<%--</s:else>--%>
+													<%--</td>--%>
+													<td align="center">
+														<input type="checkbox" name="gather_id" value="${gather.id}" onclick="changeNum()">
+													</td>
+													<td><a href="load4EditGather.action?edit_id=${gather.id}&CId=${gather.cId}" class="normal">${gather.billCode }</a></td>
+													<td align="center"><fmt:formatDate value="${gather.payDate}" pattern="yyyy-MM-dd"/></td>
+													<td align="center">${gather.cName }</td>
+													<td align="center">${gather.total }</td>
+													<td align="center">${gather.handler }</td>
+													<td align="center">${gather.status }</td>
 												</tr>
-											</s:iterator>
+											</c:forEach>
 
 											<tr>
 												<td colspan="7">&nbsp;</td>
@@ -286,25 +365,14 @@
 										style="font-size: 12px;">共${pager.totalRecord}条 <span
 											class="pager" onclick="firstPage();" style="cursor: pointer">首页</span>
 										<span class="pager" onclick="prePage();" style="cursor: pointer">上一页</span>
-										${pager.page}/${pager.totalPage} <span onclick="nextPage()"
-																			   class="pager" style="cursor: pointer">下一页</span> <span
-												onclick="lastPage()" class="pager" style="cursor: pointer">末页</span>
-										<select name="_pageNum" onchange="toUrl('_pageNum_down','_null');"
-												id="_pageNum_down">
-											<s:bean name="org.apache.struts2.util.Counter" id="counter">
-												<s:param name="first" value="0" />
-												<s:param name="last" value="#request.pager.totalPage-1" />
-												<s:iterator>
-													<s:if test="#counter.current==#request.pager.page">
-														<option value="${counter.current}" selected="selected">第${counter.current}页</option>
-													</s:if>
-													<s:else>
-														<option value="${counter.current}">第${counter.current}页</option>
-													</s:else>
-												</s:iterator>
-											</s:bean>
-										</select> <select name="_pageSize"
-														  onchange="toUrl('_null','_pageSize_down')" id="_pageSize_down">
+										${pager.page}/${pager.totalPage} <span onclick="nextPage()" class="pager" style="cursor: pointer">下一页</span>
+										<span onclick="lastPage()" class="pager" style="cursor: pointer">末页</span>
+										<select name="_pageNum" onchange="toUrl('_pageNum_down','_null');" id="_pageNum_down">
+											<c:forEach begin="1" end="${pager.totalPage}" varStatus="sta">
+												<option value="${sta.index }" <c:if test="${pager.page==sta.index }">selected="selected"</c:if>>第${sta.index }页</option>
+											</c:forEach>
+										</select>
+										<select name="_pageSize" onchange="toUrl2('_pageSize_down')" id="_pageSize_down">
 											<option value="5">5条</option>
 											<option value="6">6条</option>
 											<option value="7">7条</option>

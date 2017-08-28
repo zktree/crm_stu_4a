@@ -321,4 +321,36 @@
       code = #{code,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getGatherList" resultType="com.crm.model.Gather">
+    SELECT id,bill_code billCode,pay_date payDate,c_name cName,
+    total,handler,status
+    FROM b_gather
+    <!--<include refid="SQL"></include>-->
+    limit #{from},#{pageSize}
+  </select>
+
+
+  <select id="countGather" resultType="int">
+    SELECT count(id)
+    FROM b_gather
+    <!--<include refid="SQL"></include>-->
+  </select>
+
+  <select id="findAllGather" resultType="com.crm.model.Gather">
+    SELECT id,bill_code billCode FROM b_gather
+  </select>
+
+  <select id="findGatherByIds" resultType="com.crm.model.Gather">
+    SELECT id,bill_code billCode FROM b_gather
+    WHERE id IN
+    <foreach collection="ids" open="(" separator="," close=")" item="ids">#{ids}</foreach>
+  </select>
+
+  <delete id="delGatherListByIds">
+    DELETE FROM b_gather
+    WHERE id = #{id}
+  </delete>
+
+
 </mapper>

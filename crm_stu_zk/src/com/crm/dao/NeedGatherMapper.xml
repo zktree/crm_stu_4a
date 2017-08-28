@@ -364,10 +364,15 @@
   </select>
 
   <select id="findOrderByIds" resultType="com.crm.model.NeedGather">
-    SELECT id,sale_code saleCode FROM b_order
+    SELECT id,sale_code saleCode FROM b_need_gather
     WHERE id IN
     <foreach collection="ids" open="(" separator="," close=")" item="ids">#{ids}</foreach>
   </select>
+
+  <delete id="delOrderListByIds">
+    DELETE FROM b_need_gather
+    WHERE id = #{id}
+  </delete>
 
 
 </mapper>

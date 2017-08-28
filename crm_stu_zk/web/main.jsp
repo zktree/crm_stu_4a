@@ -295,11 +295,11 @@ function initMenu(){
 							</tr>
 							<tr>
 								<td><img src="image/left_tree2_5.gif" width="17" height="17" align="absmiddle" style="margin-right: 5px;">
-								<a href="gather/list" class="nav" target="right_window">应收款项</a></td>
+								<a href="needGather/list" class="nav" target="right_window">应收款项</a></td>
 							</tr>
 							<tr>
 								<td><img src="image/left_tree2_6.gif" align="absmiddle" style="margin-right: 5px;">
-									<a href="needGather/list" class="nav" target="right_window">销售收款</a></td>
+									<a href="gather/list" class="nav" target="right_window">销售收款</a></td>
 
 							</tr>
 						</table>

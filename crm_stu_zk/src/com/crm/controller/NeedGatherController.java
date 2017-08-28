@@ -37,7 +37,7 @@ public class NeedGatherController {
         }
         //删除
         if ("del".equals(isDel)){
-            needGatherService.delListByIds(needGather);
+            needGatherService.delListByIds(needGather_id);
         }
 
         DataModel<NeedGather> dataModel = needGatherService.getList(pager,needGather);
