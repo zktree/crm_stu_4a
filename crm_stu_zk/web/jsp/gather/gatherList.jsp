@@ -186,7 +186,7 @@
 	</script>
 </head>
 <body onload="initPageSize()">
-<form name="load4NeedGatherMain.action" method="post" name="form1" id="form1">
+<form name="needGather/list" method="post" name="form1" id="form1">
 	<input type="hidden" name="page" value="${pager.page}" id="hiddenPageNum" />
 	<input type="hidden" name="pageSize" value="${pager.pageSize}" id="hiddenPageSize" />
 	<input type="hidden" name="isDel" value="" id="isDel" />
@@ -213,18 +213,22 @@
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%" id="selectTable">
 								<tr>
 									<td width="11%">销售单号:</td>
-									<td width="17%"><input type="text" name="textfield" class="inputTextStyle"></td>
+									<td width="17%"><input type="text" value="${needGather.saleCode}" name="saleCode" class="inputTextStyle"></td>
 									<td width="11%">客户名称:</td>
-									<td width="17%"><input type="text" name="textfield4" class="inputTextStyle"></td>
+									<td width="17%"><input type="text" value="${needGather.cName}" name="cName" class="inputTextStyle"></td>
 									<td width="11%">产生日期:</td>
-									<td width="17%"><input type="text" name="textfield42" class="inputTextStyle"></td>
-									<td width="5%"><img src="image/s1.gif" width="59" height="22"></td>
-									<td width="10%" align="left"><img src="image/s2.gif" width="62" height="22"></td>
+									<td width="17%"><input type="text" value="<fmt:formatDate value="${needGather.buildDate}" pattern="yyyy-MM-dd"/>" name="buildDate" class="inputTextStyle"></td>
+									<td width="5%">
+										<img src="image/s1.gif" width="59" height="22" onclick="submitForm()" alt="搜索按钮">
+									</td>
+									<td width="10%" align="left">
+										<img src="image/s2.gif" width="62" height="22" onclick="dataempty()">
+									</td>
 									<td width="1%" align="left">&nbsp;</td>
 								</tr>
 								<tr>
 									<td>所属人:</td>
-									<td><input type="text" name="textfield2" class="inputTextStyle"></td>
+									<td><input type="text" value="${needGather.ownerUsr}" name="ownerUsr" class="inputTextStyle"></td>
 									<td>客户省份:</td>
 									<td><select name="select2" class="selectOptionStyle">
 										<option value="-1" selected="selected">---</option>
@@ -273,7 +277,7 @@
 					</tr>
 					<tr>
 						<td height="16" valign="top"><br/>
-							<img src="image/s3.gif" width="62" height="22">
+							<img src="image/s3.gif" width="62" height="22"  onclick="javascript:window.location.href='needGather/toAdd'">
 							<img src="image/s7.gif" width="59" height="22" alt="删除按钮" onclick="toDel();">
 						</td>
 					</tr>

@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by meng on 2017/8/25.
@@ -39,11 +40,12 @@ public class GatherController {
         if ("del".equals(isDel)){
             gatherService.delListByIds(gather_id);
         }
-
+        List<String> handler = gatherService.getHandler();
         DataModel<Gather> dataModel = gatherService.getList(pager,gather);
         ModelAndView modelAndView = new ModelAndView("/jsp/gather/gatherProcessList.jsp");
         modelAndView.addObject("pager",dataModel.getPager());
         modelAndView.addObject("gatherList",dataModel.getRows());
+        modelAndView.addObject("handler",handler);
         return modelAndView;
 
     }

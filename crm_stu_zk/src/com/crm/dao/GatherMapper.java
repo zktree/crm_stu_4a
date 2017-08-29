@@ -24,11 +24,13 @@ public interface GatherMapper {
 
     List<Gather> findAllGather();
 
-    List<Gather> getGatherList(@Param("from") int from, @Param("pageSize") int pageSize,@Param("gather") Gather gather);
+    List<Gather> getGatherList(@Param("from") int from, @Param("pageSize") int pageSize,@Param("g") Gather gather);
 
     List<Gather> findGatherByIds(@Param("ids") Integer[] gather_id);
 
     int countGather(@Param("g") Gather gather);
 
     void delGatherListByIds(int id);
+
+    List<String> getHandler();
 }

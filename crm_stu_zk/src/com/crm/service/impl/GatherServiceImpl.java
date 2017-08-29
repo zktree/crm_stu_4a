@@ -130,4 +130,9 @@ public class GatherServiceImpl implements GatherService {
             }
         }
     }
+
+    @Override
+    public List<String> getHandler() {
+        return gatherMapper.getHandler();
+    }
 }

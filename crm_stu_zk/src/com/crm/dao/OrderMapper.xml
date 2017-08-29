@@ -508,7 +508,7 @@
       AND seller LIKE concat('%',#{order.seller},'%')
     </if>
     <if test="order.cName != null and order.cName != ''">
-      AND cName LIKE concat('%',#{order.cName},'%')
+      AND c_name LIKE concat('%',#{order.cName},'%')
     </if>
   </sql>
 

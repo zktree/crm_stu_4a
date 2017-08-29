@@ -5,6 +5,7 @@ import com.crm.model.Gather;
 import com.crm.model.Pager;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by meng on 2017/8/28.
@@ -16,4 +17,6 @@ public interface GatherService {
     DataModel<Gather> getList(Pager pager, Gather gather);
 
     void delListByIds(Integer[] gather_id);
+
+    List<String> getHandler();
 }

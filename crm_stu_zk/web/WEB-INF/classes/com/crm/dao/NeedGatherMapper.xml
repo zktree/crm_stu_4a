@@ -320,8 +320,8 @@
     <if test="n.cName != null and n.cName != ''">
       AND c_name LIKE concat('%',#{n.cName},'%')
     </if>
-    <if test="n.createTime != null and n.createTime != ''">
-      AND createTime LIKE concat('%',#{n.createTime},'%')
+    <if test="n.createtime != null and n.createtime != ''">
+      AND createtime LIKE concat('%',#{n.createtime},'%')
     </if>
     <if test="n.ownerUsr != null and n.ownerUsr != ''">
       AND owner_usr LIKE concat('%',#{n.ownerUsr},'%')
@@ -348,7 +348,7 @@
     SELECT id,sale_code saleCode,c_name cName,build_date buildDate,
     payed,total,balance,over_flag overFlag,owner_usr ownerUsr,status
     FROM b_need_gather
-    <!--<include refid="SQL"></include>-->
+    <include refid="SQL"></include>
     limit #{from},#{pageSize}
   </select>
 
@@ -356,7 +356,7 @@
   <select id="countNeedGather" resultType="int">
     SELECT count(id)
     FROM b_need_gather
-    <!--<include refid="SQL"></include>-->
+    <include refid="SQL"></include>
   </select>
 
   <select id="findAllOrder" resultType="com.crm.model.NeedGather">

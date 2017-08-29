@@ -219,8 +219,7 @@
 								<td width="25%"><input type="text" name="code" class="inputTextStyle" value="${productType.code}"></td>
 								<td width="10%">商品类别名称:</td>
 								<td width="27%"><input type="text" name="name" class="inputTextStyle" value="${productType.name}"></td>
-								<td width="7%"><img src="image/s1.gif" width="59"
-													height="22" onclick="submitForm2()" alt="搜索按钮"></td>
+								<td width="7%"><img src="image/s1.gif" width="59" height="22" onclick="submitForm2()" alt="搜索按钮"></td>
 								<td width="16%" align="left"><img src="image/s2.gif" width="62" height="22"></td>
 								<td width="5%" align="left">&nbsp;</td>
 							</tr>
@@ -236,7 +235,7 @@
 						<td height="10" bgcolor="#f7fbfc">&nbsp;</td>
 					</tr>
 					<tr>
-						<td height="11"><img src="image/t1.gif" align="absmiddle"> <span style="font-size:14; font-weight:bold;">商品类别列表</span></td>
+						<td height="11"><img src="image/t1.gif" align="absmiddle"> <span style="font-size:14px; font-weight:bold;">商品类别列表</span></td>
 					</tr>
 					<tr>
 						<td height="16" valign="top"><br/>

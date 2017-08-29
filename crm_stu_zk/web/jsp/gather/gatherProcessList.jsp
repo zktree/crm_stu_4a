@@ -16,6 +16,13 @@
 	<script src="css_js/popup4exExcel.js" type="text/javascript"></script>
 	<link href="css_js/general.css" rel="stylesheet" type="text/css"></link>
 	<script type="text/javascript">
+
+
+
+	</script>
+
+	<script type="text/javascript">
+
         $(function(){
             //获得每页显示几条数据
             var pageSize="${pager.pageSize}";
@@ -186,7 +193,7 @@
 	</script>
 </head>
 <body onload="initPageSize()">
-<form name="load4GatherMain.action" method="post" name="form1" id="form1">
+<form name="/gather/list" method="post" name="form1" id="form1">
 	<input type="hidden" name="page" value="${pager.page}" id="hiddenPageNum" />
 	<input type="hidden" name="pageSize" value="${pager.pageSize}" id="hiddenPageSize" />
 	<input type="hidden" name="isDel" value="" id="isDel" />
@@ -212,22 +219,26 @@
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%" id="selectTable">
 								<tr>
 									<td width="11%">客户名称:</td>
-									<td width="17%"><input type="text" name="cName" class="inputTextStyle"></td>
+									<td width="17%"><input type="text" value="${gather.cName}" name="cName" class="inputTextStyle"></td>
 									<td width="11%">收款单号:</td>
-									<td width="17%"><input type="text" name="billCode" class="inputTextStyle"></td>
+									<td width="17%"><input type="text" value="${gather.billCode}" name="billCode" class="inputTextStyle"></td>
 									<td width="11%">收款时间:</td>
-									<td width="17%"><input type="text" name="payDate" class="inputTextStyle"></td>
-									<td width="5%"><img src="image/s1.gif" width="59" height="22"></td>
-									<td width="10%" align="left"><img src="image/s2.gif" width="62" height="22"></td>
+									<td width="17%"><input type="text" value="${gather.payDate}" name="payDate" class="inputTextStyle"></td>
+									<td width="5%">
+										<img src="image/s1.gif" width="59" height="22" onclick="submitForm()" alt="搜索按钮">
+									</td>
+									<td width="10%" align="left">
+										<img src="image/s2.gif" width="62" height="22" onclick="dataempty()">
+									</td>
 									<td width="1%" align="left">&nbsp;</td>
 								</tr>
 								<tr>
 									<td>经手人:</td>
 									<td>
-										<select name="select3" class="selectOptionStyle">
+										<select name="handler" id="handler"  class="inputTextStyle">
 											<option value="">----</option>
-											<c:forEach items="${users}" var="user">
-												<option value="${user.id}">${user.name}</option>
+											<c:forEach items="${handler}" var="handler">
+													<option value="${handler}" <c:if test="${gather.handler == handler}">selected="selected"</c:if>>${handler}</option>
 											</c:forEach>
 										</select>
 									</td>

@@ -321,12 +321,30 @@
       code = #{code,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <sql id="SQL">
+    WHERE 1=1
+    <if test="g.billCode != null and g.billCode != ''">
+      AND bill_code LIKE concat('%',#{g.billCode},'%')
+    </if>
+    <if test="g.payDate != null and g.payDate != ''">
+      AND pay_date LIKE concat('%',#{g.payDate},'%')
+    </if>
+    <if test="g.cName != null and g.cName != ''">
+      AND c_Name LIKE concat('%',#{g.cName},'%')
+    </if>
+    <if test="g.handler != null and g.handler != ''">
+      AND handler LIKE concat('%',#{g.handler},'%')
+    </if>
+  </sql>
+
+
+
 
   <select id="getGatherList" resultType="com.crm.model.Gather">
     SELECT id,bill_code billCode,pay_date payDate,c_name cName,
     total,handler,status
     FROM b_gather
-    <!--<include refid="SQL"></include>-->
+    <include refid="SQL"></include>
     limit #{from},#{pageSize}
   </select>
 
@@ -334,7 +352,7 @@
   <select id="countGather" resultType="int">
     SELECT count(id)
     FROM b_gather
-    <!--<include refid="SQL"></include>-->
+    <include refid="SQL"></include>
   </select>
 
   <select id="findAllGather" resultType="com.crm.model.Gather">
@@ -351,6 +369,12 @@
     DELETE FROM b_gather
     WHERE id = #{id}
   </delete>
+
+  <select id="getHandler" resultType="String">
+    SELECT handler
+    FROM b_gather
+    GROUP BY handler
+  </select>
 
 
 </mapper>
