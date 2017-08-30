@@ -51,7 +51,7 @@
 </head>
 <body>
 <form name="orderDetailForm" method="post" action="order/orderDetail/addOrUpdate" id="orderDetailForm">
-    <input type="hidden" name="edit_id" id="edit_id" value="${orderDetail.id}" />
+    <input type="hidden" name="edit_id" id="edit_id" value="${edit_id}" />
     <input type="hidden" id="pId" name="pId" value="${pId}"/>
     <input type="hidden" name="orderId" value="${orderId}${orderDetail.orderId}"/>
     <table width="99%" border="0" cellspacing="0" cellpadding="0" id="index_main_table">

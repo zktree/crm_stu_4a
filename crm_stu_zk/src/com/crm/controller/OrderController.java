@@ -98,10 +98,10 @@ public class OrderController {
         } else {//修改
             order.setId(edit_id);
             boolean flag=orderService.updateOrder(order);
-            orderDetail = orderService.findOrderDetailById(order.getId());
 
             modelAndView = new ModelAndView("/jsp/order/orderDetail.jsp");
-            modelAndView.addObject(orderDetail);
+            modelAndView.addObject("edit_id",edit_id);
+
             if(flag){
                 modelAndView.addObject("mess", "修改成功");
             }else{
@@ -124,14 +124,21 @@ public class OrderController {
                 modelAndView.addObject("mess", "修改失败");
             }
         } else {
-            orderDetail.setId(edit_id);
-            boolean flag = orderService.updateOrderDetail(orderDetail);
+            orderDetail.setOrderId(edit_id);
+            boolean flag = orderService.addOrderDetail(orderDetail);
             modelAndView = new ModelAndView("/order/list");
             if(flag){
                 modelAndView.addObject("mess", "修改成功");
             }else{
                 modelAndView.addObject("mess", "修改失败");
             }
+//            boolean flag = orderService.updateOrderDetail(orderDetail);
+//            modelAndView = new ModelAndView("/order/list");
+//            if(flag){
+//                modelAndView.addObject("mess", "修改成功");
+//            }else{
+//                modelAndView.addObject("mess", "修改失败");
+//            }
 
         }
 

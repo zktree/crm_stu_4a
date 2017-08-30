@@ -229,29 +229,29 @@
 								<tr>
 									<td>所属人:</td>
 									<td><input type="text" value="${needGather.ownerUsr}" name="ownerUsr" class="inputTextStyle"></td>
-									<td>客户省份:</td>
-									<td><select name="select2" class="selectOptionStyle">
-										<option value="-1" selected="selected">---</option>
-										<option value="1">重要客户</option>
-										<option value="2">潜在客户</option>
-									</select></td>
-									<td>客户城市:</td>
-									<td><select name="select" class="selectOptionStyle">
-										<option value="-1" selected="selected">---</option>
-										<option value="1">重要客户</option>
-										<option value="2">潜在客户</option>
-									</select></td>
-									<td>&nbsp;</td>
-									<td align="left">&nbsp;</td>
-									<td align="left">&nbsp;</td>
+									<%--<td>客户省份:</td>--%>
+									<%--<td><select name="select2" class="selectOptionStyle">--%>
+										<%--<option value="-1" selected="selected">---</option>--%>
+										<%--<option value="1">重要客户</option>--%>
+										<%--<option value="2">潜在客户</option>--%>
+									<%--</select></td>--%>
+									<%--<td>客户城市:</td>--%>
+									<%--<td><select name="select" class="selectOptionStyle">--%>
+										<%--<option value="-1" selected="selected">---</option>--%>
+										<%--<option value="1">重要客户</option>--%>
+										<%--<option value="2">潜在客户</option>--%>
+									<%--</select></td>--%>
+									<%--<td>&nbsp;</td>--%>
+									<%--<td align="left">&nbsp;</td>--%>
+									<%--<td align="left">&nbsp;</td>--%>
 								</tr>
 								<tr>
-									<td>客户区域名称:</td>
-									<td><select name="select3" class="selectOptionStyle">
-										<option value="-1" selected="selected">---</option>
-										<option value="1">重要客户</option>
-										<option value="2">潜在客户</option>
-									</select></td>
+									<%--<td>客户区域名称:</td>--%>
+									<%--<td><select name="select3" class="selectOptionStyle">--%>
+										<%--<option value="-1" selected="selected">---</option>--%>
+										<%--<option value="1">重要客户</option>--%>
+										<%--<option value="2">潜在客户</option>--%>
+									<%--</select></td>--%>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>

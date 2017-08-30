@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by meng on 2017/8/19.
@@ -94,59 +95,65 @@ public class ProductController {
             Product product,
             String save,
             Integer edit_id) throws IOException {
+        //当前系统时间
+        Long currentTime = System.currentTimeMillis();
         ModelAndView modelAndView = null;
         //新增商品类别
         if(edit_id==null){//新增
             //获得上传的文件名
             String fileName = file.getOriginalFilename();
             //获得上传文件的真实路径
-            String path = request.getServletContext().getRealPath("")+"/"+fileName;
+            String path = "F:/idea/project_3/crm_stu_zk/web/image/"+String.valueOf(currentTime)+fileName;
             System.out.println(path);
             //创建新文件对象
             File newFile = new File(path);
             //将文件复制到新文件中
             file.transferTo(newFile);
+
             //放入数据库的字段
-            product.setPicture(fileName);
+            product.setPicture(String.valueOf(currentTime)+fileName);
             //判断是否成功
             boolean flag=productService.addProduct(product);
             //两个不同按钮不同龄功能
             if ("0".equals(save)){
-
-                modelAndView = new ModelAndView("/product/list");
+                modelAndView = new ModelAndView("redirect:/product/list");
             }else {
-                modelAndView = new ModelAndView("/product/toAdd");
+                modelAndView = new ModelAndView("redirect:/product/toAdd");
             }
             if(flag){
                 modelAndView.addObject("mess", "新增成功");
             }else{
                 modelAndView.addObject("mess", "新增失败");
             }
-            modelAndView.addObject("product",new Product());
+
         }else {//修改
             product.setId(edit_id);
 
             //获得上传的文件名
             String fileName = file.getOriginalFilename();
             //获得上传文件的真实路径
-            String path = request.getServletContext().getRealPath("")+"/"+fileName;
+            String path = "F:/idea/project_3/crm_stu_zk/web/image/"+String.valueOf(currentTime)+fileName;
             //创建新文件对象
             File newFile = new File(path);
             //将文件复制到新文件中
             file.transferTo(newFile);
-            //当前系统时间
-            Long currentTime = System.currentTimeMillis();
+
             //放入数据库的字段
             product.setPicture(String.valueOf(currentTime)+fileName);
 
             boolean flag = productService.updateProduct(product);
-            modelAndView = new ModelAndView("/product/list");
+            if ("0".equals(save)){
+                modelAndView = new ModelAndView("redirect:/product/list");
+            }else {
+                modelAndView = new ModelAndView("redirect:/product/toAdd");
+            }
             if(flag){
                 modelAndView.addObject("mess", "修改成功");
             }else{
                 modelAndView.addObject("mess", "修改失败");
             }
         }
+         modelAndView.addObject("product",new Product());
         return modelAndView;
     }
 

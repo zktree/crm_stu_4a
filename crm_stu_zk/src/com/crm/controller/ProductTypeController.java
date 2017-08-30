@@ -183,10 +183,11 @@ public class ProductTypeController {
 	 */
 	@RequestMapping("/addOrUpdate")
 	public ModelAndView addOrUpdate(ProductType productType,Integer edit_id){
-		ModelAndView mav=new ModelAndView("/jsp/productType/productTypeAdd.jsp");
+		ModelAndView mav=null;
 		if(edit_id==null){//新增
 			//新增商品类别
 			boolean flag=productTypeService.addProductType(productType);
+			mav = new ModelAndView("redirect:/productType/toAdd");
 			
 			if(flag){
 				mav.addObject("mess", "新增成功");
@@ -197,6 +198,7 @@ public class ProductTypeController {
 			//修改商品类别
 			productType.setId(edit_id);
 			boolean flag=productTypeService.updateProductType(productType);
+			mav = new ModelAndView("/jsp/productType/productTypeAdd.jsp");
 			if(flag){
 				mav.addObject("mess", "修改成功");
 			}else{

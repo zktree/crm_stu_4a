@@ -105,7 +105,7 @@
                 <%--}--%>
 
             }
-            if('${orderDate}' != "点击显示时间列表"){
+            if('$("#orderDate")' == "点击显示时间列表"){
                 $("#orderDate").val('');
             }
             if ($('#createTime').val()=="点击显示时间列表"){
@@ -165,7 +165,8 @@
         </tr>
         <tr>
             <td valign="middle" ><img src="image/s10.gif" width="58" height="22" style="cursor: pointer;" onclick="submitForm();">
-                <img src="image/s8.gif" width="59" height="22"><span style="font-size:12px;color:#009900;">保存后可新建明细</span></td>
+                <img src="image/s8.gif" width="59" height="22" onclick=history.go(-1)>
+                <span style="font-size:12px;color:#009900;">保存后可新建明细</span></td>
         </tr>
         <tr>
             <td id="errorInfo" style="font-size: 12px; color: #FF0000;">${mess}</td>

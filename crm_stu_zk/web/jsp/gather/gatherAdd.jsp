@@ -131,6 +131,10 @@
 
         }
 
+        function openCompanyWindow(){
+            window.open("open/companyList?MType=companyList_openWindow","_blank",
+                "width=740,height=380,toolbar=no,menubar=no,resizable=no,status=no,scrollbars=yes");
+        }
 
         function openWindow4ToDraft(){
             window.open("auditReason.jsp","_blank",
@@ -170,7 +174,8 @@
                     <img src="image/s10.gif" width="58" height="22" onclick="submitForm();"><img src="image/tijiao.gif" onclick="javascript:window.location.href='gatherSubmit.action?edit_id=${edit_id}&CId=${CId }'"><img src="image/s8.gif" width="59" height="22">
                 </s:elseif>
                 <s:elseif test="#request.gather.status=='待审核'">
-                    <img src="image/shenhe.gif" onclick="javascript:window.location.href='gatherAuditingPass.action?edit_id=${edit_id}&CId=${CId }'"><img src="image/bohui.gif" onclick="openWindow4ToDraft();"><img src="image/s8.gif" width="59" height="22">
+                    <img src="image/shenhe.gif" onclick="javascript:window.location.href='gatherAuditingPass.action?edit_id=${edit_id}&CId=${CId }'">
+                    <img src="image/bohui.gif" onclick="openWindow4ToDraft();"><img src="image/s8.gif" width="59" height="22">
                 </s:elseif>
                 <s:else>
                     <img src="image/s8.gif" width="59" height="22">
@@ -192,8 +197,10 @@
                                 <td width="10%">客户编码:</td>
                                 <td width="41%" style="background-color:#FFFFFF;">${company.code}</td>
                                 <td width="7%" align="left"><span style="color:#FF0000">客户名称:</span></td>
-                                <td style="background-color:#FFFFFF;"><input type="text" name="CName" value="${company.name}" class="addCText" readonly="readonly">
-                                    <img src="image/dakaichuangkou.gif" width="21" height="19"></td>
+                                <td style="background-color:#FFFFFF;">
+                                    <input type="text" name="cName" value="${company.name}" class="addCText" readonly="readonly">
+                                    <img src="image/dakaichuangkou.gif" width="21" height="19" onclick="openCompanyWindow()">
+                                </td>
                             </tr>
                             <tr>
                                 <td>客户等级:</td>

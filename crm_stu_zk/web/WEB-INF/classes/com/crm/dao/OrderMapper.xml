@@ -514,7 +514,7 @@
 
 
   <select id="getOderList" resultType="com.crm.model.Order">
-    SELECT id,code,order_date orderDate,c_name cName,seller,total,agio,agio_total agioTotal,auditor,status
+    SELECT id,code,order_date orderDate,c_name cName,createTime,seller,total,agio,agio_total agioTotal,auditor,status
     FROM b_order
     <include refid="SQL"></include>
     limit #{from},#{pageSize}

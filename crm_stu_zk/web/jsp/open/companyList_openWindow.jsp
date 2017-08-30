@@ -385,7 +385,8 @@
 											<c:forEach items="${companyList}" var="company">
 												<tr class="select_content_bg">
 													<td align="center">
-														<img src="image/xuanze.gif" align="absmiddle" style="cursor:pointer;" onclick="setOpenerValue('${company.id}','${company.name}')"> 									</td>
+														<img src="image/xuanze.gif" align="absmiddle" style="cursor:pointer;"
+															 onclick="setOpenerValue('${company.id}','${company.name}'),${company.code},${company.grade}"> 									</td>
 													<td>${company.code}</td>
 													<td><a href="loadLinkMan.action?id=${company.id}" class="normal">${company.name}</a></td>
 													<td align="center">${company.quality}</td>

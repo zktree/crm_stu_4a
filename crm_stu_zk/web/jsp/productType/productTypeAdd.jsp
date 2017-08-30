@@ -36,6 +36,10 @@
       function submitForm(){
           document.getElementById("productTypeForm").submit();
       }
+      
+      function backpage() {
+          history.go(-1);
+      }
   </script>
 </head>
 <body STYLE='OVERFLOW:SCROLL;OVERFLOW-X:HIDDEN'>
@@ -54,7 +58,7 @@
     <tr>
       <td valign="middle" >
         <img src="image/s10.gif" width="58" height="22" style="cursor: pointer;" onclick="submitForm();">
-        <img src="image/s8.gif" width="59" height="22">
+        <img src="image/s8.gif" width="59" height="22" onclick="backpage()">
       </td>
     </tr>
     <tr>

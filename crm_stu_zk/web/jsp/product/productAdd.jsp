@@ -156,7 +156,7 @@
                 oFReader = new FileReader();
                 oFReader.readAsDataURL(file.files[0]);
                 oFReader.onload = function(oFREvent) {
-                    pic.src = oFREvent.target.result;
+                    pic.src = oFREvent.target.result+"/image";
                 };
             } else if (document.all) {//IE8-
                 file.select();
@@ -211,7 +211,7 @@
             if('${product.picture}' != ""){
                 document.getElementById("uploadImg").width = 100;
                 document.getElementById("uploadImg").height = 100;
-                document.getElementById("uploadImg").src = "${product.picture}";
+                document.getElementById("uploadImg").src = "image/${product.picture}";
             }
         }
 
@@ -235,7 +235,7 @@
             <td valign="middle" >
                 <img src="image/s10.gif" width="58" height="22" onclick="submitForm()">
                 <img src="image/s9.gif" width="116" height="22" onclick="submitForm1()">
-                <img src="image/s8.gif" width="59" height="22">
+                <img src="image/s8.gif" width="59" height="22" onclick=history.go(-1)>
             </td>
         </tr>
         <tr>
@@ -291,7 +291,7 @@
                             </tr>
                             <tr>
                                 <td>供应商:</td>
-                                <td><input type="text" value="${product.provider}" name="provider" class="addCText">                            </td>
+                                <td><input type="text" value="${product.provider}" name="provider" class="addCText"></td>
                                 <td align="left">商品库存:</td>
                                 <td><input type="text" value="${product.stock}" name="stock" class="addCText"></td>
                                 <td>&nbsp;</td>
@@ -305,8 +305,7 @@
                             </tr>
                             <tr>
                                 <td>商品图片:</td>
-                                <td colspan="4"><input type="file" name="file" value="" onchange="javascript:fileChange(this)" style="width:90%"/>
-                                </td>
+                                <td colspan="4"><input type="file" name="file" value="${product.picture}" onchange="javascript:fileChange(this)" style="width:90%"/></td>
                             </tr>
                             <tr>
                                 <td>图片预览:</td>
